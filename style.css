@@ -1,0 +1,17 @@
+body {
+  background: linear-gradient(white,rgba(0, 0, 0, 0.336));
+  background-repeat: no-repeat;
+  height: 100%;
+  margin: 0;
+  background-attachment: fixed;
+}
+  
+canvas {
+    width: 800px;
+    height: 860px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-shadow: 3px 5px 7px #00000061;
+    transform: translate(-50%, -50%);
+}
