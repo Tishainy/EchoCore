@@ -1,17 +1,50 @@
+* {
+  box-sizing: border-box;
+  margin: 0%;
+  padding: 0%;
+}
 body {
-  background: white;
+  background: linear-gradient(white,rgba(0, 0, 0, 0.336));
   background-repeat: no-repeat;
   height: 100%;
   margin: 0;
   background-attachment: fixed;
 }
-  
+/* Estilo para la sección #inicio */
+.inicio {
+  display: flex;          /* Usamos flexbox */
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center;    /* Centra el contenido verticalmente */
+  height: 100vh;          /* Hace que la sección ocupe toda la altura de la ventana */
+}
+
+/* Resto de las secciones o elementos */
+.inicioContainer {
+  width: 800px;     
+   height: 90%;       
+  background-color: #444;   /* Fondo para que se vea */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;     /* Bordes redondeados si lo deseas */
+}
+.inicioHeader h1 {
+  font-size: 3rem;  /* Ajusta el tamaño del título */
+  color: white; /* Color del título */
+}
+
+.inicioFooter p {
+  color: white;  /* Color del texto del pie de página */
+}
+
 canvas {
-    width: 800px;
-    height: 860px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    box-shadow: 3px 5px 7px #00000061;
-    transform: translate(-50%, -50%);
+  width: 800px;
+  height: 860px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  box-shadow: 3px 5px 7px #00000061;
+  transform: translate(-50%, -50%);
 }

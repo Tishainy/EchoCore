@@ -37,6 +37,17 @@ setInterval(() => {
     if (!gameOver) enemies.push(new Enemy());
 }, 1500);
 
+// Esperar la tecla "Enter" para comenzar el juego
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        // Ocultar la sección de inicio
+        document.getElementById('inicio').style.display = 'none';
+        
+        // Mostrar la sección del juego
+        document.getElementById('game').style.display = 'block';
+    }
+});
+
 function runGame() {
     if (gameOver) return;
 

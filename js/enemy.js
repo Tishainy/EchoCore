@@ -1,5 +1,5 @@
 import { EnemyBullet } from './bullets.js';
-
+ 
 console.log("Enemy module loaded");
 
 export class Enemy {

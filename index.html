@@ -1,18 +1,32 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego</title>
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap" rel="stylesheet">
 </head>
 <body>
-    <canvas id="canvas"></canvas>
+    <!-- SECCION INICIO -->
+    <section id="inicio" class="inicio">
+        <div class="inicioContainer">
+            <div class="inicioHeader">
+                <h1>ECHOCORE</h1>
+            </div>
+            <div class="inicioCanvas">
+                <canvas></canvas>
+            </div>
+            <div class="inicioFooter">
+                <p>PRESS ENTER TO START</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCION GAME -->
+    <section id="game" class="game" style="display: none;">
+        <canvas id="canvas"></canvas>
+    </section>
+
     <script type="module" src="js/index.js"></script>
 </body>
 </html>
