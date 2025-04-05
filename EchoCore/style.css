@@ -1,0 +1,176 @@
+* {
+    box-sizing: border-box;
+    margin: 0%;
+    padding: 0%;
+  }
+  
+  body {
+    background: linear-gradient(white,rgba(0, 0, 0, 0.336));
+    background-repeat: no-repeat;
+    height: 100%;
+    margin: 0;
+    background-attachment: fixed;
+  }
+  
+  /* Estilo para la sección #inicio */
+  .inicio {
+    display: flex;          /* Usamos flexbox */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center;    /* Centra el contenido verticalmente */
+    height: 100vh;          /* Hace que la sección ocupe toda la altura de la ventana */
+  }
+  
+  /* Resto de las secciones o elementos */
+  .inicioContainer {
+    width: 800px;     
+    height: 90%;       
+    background-color: #444;   /* Fondo para que se vea */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;     /* Bordes redondeados si lo deseas */
+  }
+  
+  .inicioHeader h1 {
+    font-size: 3rem;  /* Ajusta el tamaño del título */
+    color: white; /* Color del título */
+  }
+  
+  .inicioFooter p {
+    color: white;  /* Color del texto del pie de página */
+  }
+  
+  canvas {
+    width: 800px;
+    height: 860px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-shadow: 3px 5px 7px #00000061;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Contenedor del menú */
+  .menuContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;        /* Centra el contenido horizontalmente */
+    justify-content: center;     /* Centra el contenido verticalmente */
+    text-align: center;
+    padding: 20px;
+    gap: 20px;
+    background-color: #4449;
+    width: 800px;
+    height: 90%;
+    border-radius: 10px;
+    box-shadow: 3px 5px 7px #00000061; /* Agrega sombra */
+    position: absolute;          /* Posiciona de manera absoluta */
+    top: 50%;                    /* Coloca el contenedor a la mitad de la altura */
+    left: 50%;                   /* Coloca el contenedor a la mitad de la anchura */
+    transform: translate(-50%, -50%); /* Ajusta para que quede completamente centrado */
+  }
+  
+  
+  /* Contenedor de los Power-Ups */
+  .menu_powerUps {
+    display: flex; /* Alineamos los power-ups horizontalmente */
+    justify-content: space-between; /* Los power-ups estarán separados de manera uniforme */
+    gap: 15px; /* Espacio entre los power-ups */
+    width: 100%; /* Asegúrate de que ocupe todo el ancho */
+    max-width: 800px; /* Limita el ancho para que no ocupe demasiado espacio */
+  }
+  
+  /* Cada lista de power-up (Damage, Speed, Columns) */
+  .menu_powerUps ul {
+    list-style: none; /* Elimina los puntos de la lista */
+    padding: 0;
+    margin: 0;
+    width: 30%; /* Limita el ancho de cada columna */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Alinea el contenido al centro */
+    justify-content: space-around; /* Espacio uniforme entre los elementos */
+  }
+  
+  /* Estilo para cada Power-Up */
+  .menu_powerUps li {
+    background-color: #444;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .menu_powerUps li img {
+    margin-bottom: 10px; /* Espacio entre la imagen y el texto */
+  }
+  
+  /* Efecto hover en los power-ups */
+  .menu_powerUps li:hover {
+    transform: translateY(-5px);
+  }
+  
+  .menu_powerUps button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .menu_powerUps button:hover {
+    background-color: #555;
+  }
+  
+  /* Estilo para los puntos */
+  .points {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    display: inline-block;
+    margin-top: 10px;
+  }
+  
+  /* Sección de Menú */
+  .menu {
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center;    /* Centra el contenido verticalmente */
+    height: 100vh;
+  }
+  
+  /* Estilos para el botón de inicio */
+  .buttomStar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #startButton {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  #startButton:hover {
+    background-color: #555;
+  }
+  
+  h3 {
+    margin-top: 20px;
+    color: white;
+    font-size: 1.5rem;
+  }
+  
