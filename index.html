@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ECHOCORE</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
                 <h1>ECHOCORE</h1>
             </div>
             <div class="inicioCanvas">
-                <canvas></canvas>
+                <canvas id="inicioCanvas"></canvas>
             </div>
             <div class="inicioFooter">
                 <p>PRESS ENTER TO START</p>
@@ -22,9 +22,34 @@
         </div>
     </section>
 
+    <!-- SECCION MENU -->
+    <section id="menu" class="menu" style="display: none;">
+        <div class="menuContainer">
+            <div class="menuHeader">
+                <h1>ECHOCORE</h1>
+            </div>
+            <div class="buttomStar">
+                <button id="startButton">START</button>
+                <h3>POWER UPS:</h3>
+            </div>
+            <div class="menu_powerUps">
+                <ul class="list-damage"> 
+                    <li class="damage"><img src="./img/speed/speed-l.png" alt="ex.speed-l " width="42" height="42">Damage<button>20.000</button></li>
+                    <li class="speed" style="display: none;"><img src="./img/speed/speed-ll.png" alt="ex.speed-ll" width="42" height="42">Speed<button>100.000</button></li>
+                    <li class="colums" style="display: none;"><img src="./img/speed/speed-lll.png" alt="ex.speed-lll" width="42" height="42">Colums<button>300.000</button></li>
+                </ul>
+                <ul class="list-speed">
+                </ul>
+                <ul class="list-colums">
+                </ul>
+            </div>
+            <p>Points: <span class="points"></span></p>
+        </div>
+    </section>
+
     <!-- SECCION GAME -->
     <section id="game" class="game" style="display: none;">
-        <canvas id="canvas"></canvas>
+        <canvas id="gameCanvas"></canvas>
     </section>
 
     <script type="module" src="js/index.js"></script>

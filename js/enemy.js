@@ -1,5 +1,5 @@
 import { EnemyBullet } from './bullets.js';
- 
+
 console.log("Enemy module loaded");
 
 export class Enemy {
@@ -8,7 +8,7 @@ export class Enemy {
         this.y = -40;
         this.width = 30;
         this.height = 30;
-        this.speed = 2 + Math.random() * 2;
+        this.speed = 1 + Math.random();
         this.rotation = 0;
         this.shootCooldown = 0;
         this.exploding = false;
@@ -16,7 +16,11 @@ export class Enemy {
         this.opacity = 1;
     }
 
-    update(player, enemyBullets, canvas) {
+    update(player, enemyBullets, canvas, isSlowMotion) {
+        if (isSlowMotion) {
+            this.speed *= 0.5; // Reducir la velocidad de los enemigos en modo lento
+        }
+
         if (this.exploding) {
             this.explosionSize += 2;
             this.opacity -= 0.02;
@@ -31,7 +35,7 @@ export class Enemy {
             this.shoot(player, enemyBullets);
             this.shootCooldown = 1000; // Reset cooldown
         } else {
-            this.shootCooldown -= 16; // Decrease cooldown
+            this.shootCooldown -= 10; // Decrease cooldown
         }
 
         return this.y > canvas.height; // Return true if off-screen
