@@ -259,6 +259,7 @@ canvas {
 .menuContainer p {
   margin-top: 20px; /* Space above points */
   color: white; /* Keep the color */
+  margin-bottom: 15px;
   text-align: center; /* Center the entire line */
 }
 
