@@ -23,36 +23,64 @@
     </section>
 
 
-    <!-- SECCION MENU -->
-    <section id="menu" class="menu" style="display: none;">
-        <div class="menuContainer">
-            <div class="menuHeader">
-                <h1>ECHOCORE</h1>
-            </div>
-            <div class="buttomStar">
-                <button id="startButton">START</button>
-                <h3>POWER UPS:</h3>
-            </div>
-            <div class="menu_powerUps">
-                <ul class="list-damage"> 
-                    <li class="damage"><img src="./img/speed/speed-l.png" alt="ex.speed-l " width="42" height="42">Damage-l<button>20.000</button></li>
-                    <li class="damage" style="display: none;"><img src="./img/speed/speed-ll.png" alt="ex.speed-ll" width="42" height="42">Damage-ll<button>100.000</button></li>
-                    <li class="damage" style="display: none;"><img src="./img/speed/speed-lll.png" alt="ex.speed-lll" width="42" height="42">Damage-lll<button>300.000</button></li>
-                </ul>
-                <ul class="list-speed">
-                    <li class="speed"><img src="./img/damage/damage-l.png" alt="ex.speed-l " width="42" height="42">Speed-l<button>20.000</button></li>
-                    <li class="speed" style="display: none;"><img src="./img/damage/damage-ll.png" alt="ex.speed-ll" width="42" height="42">Speed-ll<button>100.000</button></li>
-                    <li class="speed" style="display: none;"><img src="./img/damage/damage-lll.png" alt="ex.speed-lll" width="42" height="42">Speed-lll<button>300.000</button></li>
-                </ul>
-                <ul class="list-colums">
-                    <li class="colums"><img src="./img/columns/column_l.png" alt="ex.speed-l " width="42" height="42">Colums-l<button>20.000</button></li>
-                    <li class="colums" style="display: none;"><img src="./img/columns/column_ll.png" alt="ex.speed-ll" width="42" height="42">Colums-ll<button>100.000</button></li>
-                    <li class="colums" style="display: none;"><img src="./img/columns/column_lll.png" alt="ex.speed-lll" width="42" height="42">Colums-lll<button>300.000</button></li>
-                </ul>
-            </div>
-            <p>Points: <span class="points"></span></p>
+<!-- SECCION MENU -->
+<section id="menu" class="menu" style="display: none;">
+    <div class="menuContainer">
+        <div class="menuHeader">
+            <h1>ECHOCORE</h1>
         </div>
-    </section>
+        <div class="buttomStar">
+            <button id="startButton">START</button>
+            <h3>POWER UPS:</h3>
+        </div>
+        <div class="menu_powerUps">
+            <ul class="list-damage"> 
+                <li class="damage-l" style="display: block;">
+                    <img src="./img/speed/speed-l.png" alt="ex.speed-l " width="42" height="42">
+                    Damage-l<button class="damage-btn"><span class="max">20.000</span></button>
+                </li>
+                <li class="damage-ll" style="display: none;">
+                    <img src="./img/speed/speed-ll.png" alt="ex.speed-ll" width="42" height="42">
+                    Damage-ll<button class="damage-btn"><span class="max">100.000</span></button>
+                </li>
+                <li class="damage-lll" style="display: none;">
+                    <img src="./img/speed/speed-lll.png" alt="ex.speed-lll" width="42" height="42">
+                    Damage-lll<button class="damage-btn"><span class="max">300.000</span></button>
+                </li>
+            </ul>
+            
+            <ul class="list-speed">
+                <li class="speed-l" style="display: block;">
+                    <img src="./img/damage/damage-l.png" alt="ex.speed-l " width="42" height="42">
+                    Speed-l<button class="speed-btn"><span class="max">20.000</span></button>
+                </li>
+                <li class="speed-ll" style="display: none;">
+                    <img src="./img/damage/damage-ll.png" alt="ex.speed-ll" width="42" height="42">
+                    Speed-ll<button class="speed-btn"><span class="max">100.000</span></button>
+                </li>
+                <li class="speed-lll" style="display: none;">
+                    <img src="./img/damage/damage-lll.png" alt="ex.speed-lll" width="42" height="42">
+                    Speed-lll<button class="speed-btn"><span class="max">300.000</span></button>
+                </li>
+            </ul>
+        
+            <ul class="list-columns">
+                <li class="columns-l" style="display: block;">
+                    <img src="./img/columns/column_l.png" alt="ex.speed-l " width="42" height="42">
+                    Columns-l<button class="columns-btn"><span class="max">20.000</span></button>
+                </li>
+                <li class="columns-ll" style="display: none;">
+                    <img src="./img/columns/column_ll.png" alt="ex.speed-ll" width="42" height="42">
+                    Columns-ll<button class="columns-btn"><span class="max">100.000</span></button>
+                </li>
+                <li class="columns-lll" style="display: none;">
+                    <img src="./img/columns/column_lll.png" alt="ex.speed-lll" width="42" height="42">
+                    Columns-lll<button class="columns-btn"><span class="max">300.000</span></button>
+                </li>
+            </ul>            
+        <p>Points: <span class="points"></span></p>
+    </div>
+</section>
 
     <!-- SECCION GAME -->
     <section id="game" class="game" style="display: none;">

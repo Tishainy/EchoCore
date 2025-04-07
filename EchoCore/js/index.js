@@ -34,11 +34,12 @@ let blinkStartTime = 0;
 let blinkDuration = 5000;
 let isBlinking = true;
 let gameRunning = false;
-let animationFrameId = null;
+let animationFrameId = null; 
 
 // Screen shake variables
 let shakeDuration = 0;
 const shakeIntensity = 3;
+
 
 function checkPlayerEnemyCollision(player, enemy) {
     return (
@@ -52,7 +53,7 @@ function checkPlayerEnemyCollision(player, enemy) {
 let enemyInterval;
 
 document.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter' && !gameOver && !gameRunning) {
+    if (event.key === 'Enter' && !gameOver && !gameRunning) { 
         document.getElementById('inicio').style.display = 'none';
         document.getElementById('game').style.display = 'block';
         startGame();
@@ -60,7 +61,7 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.getElementById('startButton').addEventListener('click', function() {
-    if (!gameRunning) {
+    if (!gameRunning) { 
         document.getElementById('menu').style.display = 'none';
         document.getElementById('game').style.display = 'block';
         startGame();
@@ -117,10 +118,9 @@ function runGame() {
         return;
     }
 
-    // Clear the entire canvas first
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Save context state and apply shake if active
+    // Apply shake only during drawing, not during update
     ctx.save();
     if (shakeDuration > 0) {
         const shakeX = (Math.random() - 0.5) * shakeIntensity * 2;
@@ -129,13 +129,11 @@ function runGame() {
         shakeDuration--;
     }
 
-    // Draw tip
     drawTip(ctx, canvas);
     if (Date.now() - blinkStartTime > blinkDuration) {
         showTip = false;
     }
 
-    // Update player
     if (keys['j']) {
         player.size = 20;
         player.speed = 2;
@@ -143,18 +141,17 @@ function runGame() {
         player.size = 40;
         player.speed = 4;
     }
+
     shootCooldown = player.update(keys, shootCooldown, bullets, canvas);
     player.draw(ctx);
     if (player.lives <= 0) gameOver = true;
 
-    // Update and draw player bullets
     bullets.forEach((bullet, index) => {
         bullet.update();
         bullet.draw(ctx);
         if (bullet.y < 0) bullets.splice(index, 1);
     });
 
-    // Spawn boss
     if (score >= 1000 && !boss && !gameOver) {
         boss = new Boss();
         enemies = [];
@@ -162,7 +159,6 @@ function runGame() {
         console.log("Boss spawned!");
     }
 
-    // Update and draw enemies
     enemies.forEach((enemy, enemyIndex) => {
         const shouldRemove = enemy.update(player, enemyBullets, canvas, keys['j']);
         enemy.draw(ctx);
@@ -179,22 +175,20 @@ function runGame() {
         if (!enemy.exploding && checkPlayerEnemyCollision(player, enemy)) {
             player.lives--;
             enemy.exploding = true;
-            shakeDuration = 10; // Shake when player gets hit by enemy
+            shakeDuration = 10; 
         }
     });
 
-    // Update and draw boss
     if (boss) {
         const bossRemoved = boss.update(player, enemyBullets, canvas, keys['j']);
         boss.draw(ctx);
         if (bossRemoved) {
-            console.log("Boss defeated! Opacity reached 0, setting gameOver to true.");
+            console.log("Boss defeated!");
             boss = null;
             gameOver = true;
             score += 500;
         } else if (boss.exploding && shakeDuration === 0) {
-            shakeDuration = 15; // Shake when boss starts exploding
-            console.log("Boss exploding, opacity:", boss.opacity);
+            shakeDuration = 15;
         }
 
         bullets.forEach((bullet, bulletIndex) => {
@@ -203,18 +197,17 @@ function runGame() {
                 score += 50;
                 if (boss.health <= 0 && !boss.exploding) {
                     boss.exploding = true;
-                    shakeDuration = 15; // Shake when boss health hits 0
+                    shakeDuration = 15;
                 }
             }
         });
 
         if (boss && !boss.exploding && checkPlayerEnemyCollision(player, boss)) {
             player.lives--;
-            shakeDuration = 10; // Shake when player gets hit by boss
+            shakeDuration = 10;
         }
     }
 
-    // Update and draw enemy bullets
     enemyBullets.forEach((bullet, index) => {
         bullet.update();
         bullet.draw(ctx);
@@ -246,11 +239,10 @@ function runGame() {
         ) {
             player.lives--;
             enemyBullets.splice(index, 1);
-            shakeDuration = 10; // Shake when player gets hit by bullet
+            shakeDuration = 10;
         }
     });
 
-    // Draw UI
     for (let i = 0; i < player.lives; i++) {
         ctx.drawImage(heartImage, 10 + i * 40, 10, 80, 30);
     }
@@ -258,10 +250,9 @@ function runGame() {
     ctx.fillStyle = "black";
     ctx.fillText("Score: " + score, canvas.width - 100, 30);
 
-    // Restore context state to reset shake
-    ctx.restore();
+    ctx.restore(); // Restore the context state after shake
 
-    animationFrameId = requestAnimationFrame(runGame);
+    animationFrameId = requestAnimationFrame(runGame); 
 }
 
 let angle = 0;
@@ -291,4 +282,47 @@ function animate() {
 }
 
 animate();
-blinkStartTime = Date.now();
+blinkStartTime = Date.now(); 
+
+document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const currentLi = button.closest('li');
+        const spanText = button.querySelector('.max');
+
+        if (currentLi.classList.contains('damage-lll')) {
+            spanText.textContent = 'MAX';
+        } else {
+            if (currentLi.classList.contains('damage-l')) {
+                currentLi.style.display = 'none';
+                document.querySelector('.damage-ll').style.display = 'block';
+            } else if (currentLi.classList.contains('damage-ll')) {
+                currentLi.style.display = 'none';
+                document.querySelector('.damage-lll').style.display = 'block';
+            }
+        }
+
+        if (currentLi.classList.contains('speed-lll')) {
+            spanText.textContent = 'MAX';
+        } else {
+            if (currentLi.classList.contains('speed-l')) {
+                currentLi.style.display = 'none';
+                document.querySelector('.speed-ll').style.display = 'block';
+            } else if (currentLi.classList.contains('speed-ll')) {
+                currentLi.style.display = 'none';
+                document.querySelector('.speed-lll').style.display = 'block';
+            }
+        }
+
+        if (currentLi.classList.contains('columns-lll')) {
+            spanText.textContent = 'MAX';
+        } else {
+            if (currentLi.classList.contains('columns-l')) {
+                currentLi.style.display = 'none';
+                document.querySelector('.columns-ll').style.display = 'block';
+            } else if (currentLi.classList.contains('columns-ll')) {
+                currentLi.style.display = 'none';
+                document.querySelector('.columns-lll').style.display = 'block';
+            }
+        }
+    });
+});
