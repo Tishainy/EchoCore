@@ -18,12 +18,12 @@ export class Player {
         // Detectar si la tecla "j" está presionada o no
         if (keys["j"]) {
             this.isJPressed = true;
-            this.speed = 1; // Reducir la velocidad a la mitad
+            this.speed = 1.75; // Reducir la velocidad a la mitad
             this.width = 10; // Reducir el tamaño a la mitad
             this.height = 10; // Reducir el tamaño a la mitad
         } else {
             this.isJPressed = false;
-            this.speed = 2; // Restaurar la velocidad normal
+            this.speed = 3.5; // Restaurar la velocidad normal
             this.width = 20; // Restaurar el tamaño normal
             this.height = 20; // Restaurar el tamaño normal
         }
