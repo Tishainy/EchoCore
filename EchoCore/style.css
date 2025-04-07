@@ -191,7 +191,26 @@ canvas {
   gap: 15px;
 }
 
-/* Each power-up box */
+/* Contenedor de los Power-Ups */
+.menu_powerUps {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.menu_powerUps ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
 .menu_powerUps li {
   background: linear-gradient(to bottom, #7f7f7f, #555);
   border-radius: 15px;
@@ -199,10 +218,22 @@ canvas {
   text-align: center;
   transition: transform 0.3s ease-in-out, background-color 0.3s ease;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column; /* Alinea todos los elementos verticalmente */
+  align-items: center;    /* Centra el contenido */
+  justify-content: space-between; /* Distribuye los elementos de manera uniforme */
+  height: 180px; /* Altura fija para asegurar consistencia */
+  width: 150px;  /* Ancho fijo */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.menu_powerUps li img {
+  margin-bottom: 10px; /* Espacio entre la imagen y el texto */
+}
+
+.menu_powerUps li span {
+  margin: 10px 0; /* Espacio entre el texto y el botón */
+  font-size: 1rem; /* Ajusta el tamaño del texto */
 }
 
 .menu_powerUps li:hover {
@@ -210,12 +241,7 @@ canvas {
   background-color: #444;
 }
 
-.menu_powerUps li img {
-  margin-bottom: 10px;
-}
-
 .menu_powerUps button {
-  margin-top: 10px;
   padding: 8px 14px;
   background-color: #333;
   color: white;
