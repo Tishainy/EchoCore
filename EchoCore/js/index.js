@@ -14,6 +14,8 @@ const inicioCtx = inicioCanvas.getContext("2d");
 inicioCanvas.width = 500;
 inicioCanvas.height = 500;
 
+let totalPoints = 0;
+
 let keys = {};
 window.addEventListener("keydown", (event) => (keys[event.key] = true));
 window.addEventListener("keyup", (event) => (keys[event.key] = false));
@@ -34,12 +36,10 @@ let blinkStartTime = 0;
 let blinkDuration = 5000;
 let isBlinking = true;
 let gameRunning = false;
-let animationFrameId = null; 
+let animationFrameId = null;
 
-// Screen shake variables
 let shakeDuration = 0;
 const shakeIntensity = 3;
-
 
 function checkPlayerEnemyCollision(player, enemy) {
     return (
@@ -110,6 +110,9 @@ function drawTip(ctx, canvas) {
 function runGame() {
     if (gameOver) {
         clearInterval(enemyInterval);
+        totalPoints += score;
+        document.querySelector('.points').textContent = totalPoints;
+        
         setTimeout(() => {
             document.getElementById('game').style.display = 'none';
             document.getElementById('menu').style.display = 'block';
@@ -120,7 +123,6 @@ function runGame() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Apply shake only during drawing, not during update
     ctx.save();
     if (shakeDuration > 0) {
         const shakeX = (Math.random() - 0.5) * shakeIntensity * 2;
@@ -248,9 +250,11 @@ function runGame() {
     }
     ctx.font = "20px Arial";
     ctx.fillStyle = "black";
-    ctx.fillText("Score: " + score, canvas.width - 100, 30);
+    // Adjusted score position to prevent overlap
+    ctx.textAlign = "right";
+    ctx.fillText("Score: " + score, canvas.width - 20, 30);
 
-    ctx.restore(); // Restore the context state after shake
+    ctx.restore();
 
     animationFrameId = requestAnimationFrame(runGame); 
 }
@@ -268,7 +272,7 @@ function drawRotatingSquare() {
     inicioCtx.lineWidth = 24;
     inicioCtx.strokeRect(-75, -75, 150, 150);
     inicioCtx.shadowColor = "transparent";
-    inicioCtx.shadowBlur = 0;
+    ctx.shadowBlur = 0;
     inicioCtx.shadowOffsetX = 0;
     inicioCtx.shadowOffsetY = 0;
     inicioCtx.rotate(-angle);
@@ -282,7 +286,9 @@ function animate() {
 }
 
 animate();
-blinkStartTime = Date.now(); 
+blinkStartTime = Date.now();
+
+document.querySelector('.points').textContent = totalPoints;
 
 document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(button => {
     button.addEventListener('click', () => {

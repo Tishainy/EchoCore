@@ -1,14 +1,13 @@
-
 * {
   box-sizing: border-box;
   margin: 0%;
   padding: 0%;
-  font-family: jersey, sans-serif;
+  font-family: "Jersey 20", sans-serif; /* Keeping this as you imported Jersey 20 */
   font-size: 16px;
 }
 
 body {
-  background: linear-gradient(white,rgba(0, 0, 0, 0.336));
+  background: linear-gradient(white, rgba(0, 0, 0, 0.336));
   background-repeat: no-repeat;
   height: 100%;
   margin: 0;
@@ -17,38 +16,37 @@ body {
 
 /* Estilo para la sección #inicio */
 .inicio {
-  display: flex;          /* Usamos flexbox */
-  justify-content: center; /* Centra el contenido horizontalmente */
-  align-items: center;    /* Centra el contenido verticalmente */
-  height: 100vh;          /* Hace que la sección ocupe toda la altura de la ventana */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 /* Contenedor principal */
 .inicioContainer {
-  width: 800px;     
-  height: 90%;       
+  width: 800px;
+  height: 90%;
   background-color: #ababab;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;  /* Asegura que los elementos estén distribuidos entre el top y el bottom */
+  justify-content: space-between;
   align-items: center;
   text-align: center;
-  border-radius: 10px;     /* Bordes redondeados */
-  padding: 20px;           /* Espaciado interno */
+  border-radius: 10px;
+  padding: 20px;
 }
 
 /* Header: Título ECHOCORE */
 .inicioHeader {
   width: 100%;
-  margin-bottom: 10px; /* Espacio entre el título y el canvas */
+  margin-bottom: 10px;
 }
 
 .inicioHeader h1 {
-  font-size: 3rem;  /* Ajusta el tamaño del título */
-  color: #212121; /* Color del título */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
+  font-size: 3rem;
+  color: #212121;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   margin-top: 90px;
-
 }
 
 /* Contenedor del canvas */
@@ -56,7 +54,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1; /* Hace que el canvas ocupe el espacio restante */
+  flex-grow: 1;
 }
 
 /* Texto "PRESS ENTER TO START" */
@@ -68,25 +66,24 @@ body {
 }
 
 .inicioFooter p {
-  color: #212121;  /* Color del texto */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
-  font-size: 1.2rem; /* Tamaño de la fuente más pequeña */
-  animation: blink 1.5s infinite ease-in-out; /* Animación de parpadeo */
+  color: #212121;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
+  animation: blink 1.5s infinite ease-in-out;
 }
 
 /* Animación de parpadeo */
 @keyframes blink {
   0% {
-      opacity: 1;
+    opacity: 1;
   }
   50% {
-      opacity: 0;
+    opacity: 0;
   }
   100% {
-      opacity: 1;
+    opacity: 1;
   }
 }
-
 
 canvas {
   width: 800px;
@@ -159,8 +156,13 @@ canvas {
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }
 
 .buttomStar h3 {
@@ -189,6 +191,7 @@ canvas {
   gap: 15px;
 }
 
+/* Each power-up box */
 .menu_powerUps li {
   background: linear-gradient(to bottom, #7f7f7f, #555);
   border-radius: 15px;
@@ -227,11 +230,19 @@ canvas {
 }
 
 /* Estilo para los puntos */
+.menuContainer p {
+  margin-top: 20px; /* Space above points */
+  color: white; /* Keep the color */
+  text-align: center; /* Center the entire line */
+}
+
+/* Remove extra styling from .points */
 .points {
-  font-size: 1.8rem;
-  font-weight: bold;
+  color: white; /* Keep the color */
+  font-size: 2.5rem; /* Font size for points */
+}
+
+.word {
   color: white;
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
+  font-size: 2.5rem; /* Font size for word */
 }
