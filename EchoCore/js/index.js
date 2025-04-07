@@ -109,7 +109,7 @@ function runGame() {
         clearInterval(enemyInterval);
         setTimeout(() => {
             document.getElementById('game').style.display = 'none';
-            documenta = document.getElementById('menu').style.display = 'block';
+            document.getElementById('menu').style.display = 'block';
             gameRunning = false; // Reset flag when game ends
         }, 1000);
         return;
