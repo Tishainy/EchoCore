@@ -12,6 +12,7 @@ export class Player {
         this.speed = 2; // Velocidad normal
         this.rotation = 0;
         this.isJPressed = false; // Estado para saber si la tecla "j" está presionada
+        this.damageLevel = 1; // Nivel de daño del jugador
     }
 
     update(keys, shootCooldown, bullets, canvas) {
