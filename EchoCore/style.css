@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0%;
   padding: 0%;
-  font-family: "Jersey 20", sans-serif; /* Keeping this as you imported Jersey 20 */
+  font-family: "Jersey 20", sans-serif; /* Mantiene la fuente Jersey 20 -- Keeps the Jersey 20 font */
   font-size: 16px;
 }
 
@@ -14,7 +14,7 @@ body {
   background-attachment: fixed;
 }
 
-/* Estilo para la sección #inicio */
+/* Estilo para la sección #inicio -- Style for the #inicio section */
 .inicio {
   display: flex;
   justify-content: center;
@@ -22,7 +22,7 @@ body {
   height: 100vh;
 }
 
-/* Contenedor principal */
+/* Contenedor principal -- Main container */
 .inicioContainer {
   width: 800px;
   height: 90%;
@@ -36,7 +36,7 @@ body {
   padding: 20px;
 }
 
-/* Header: Título ECHOCORE */
+/* Header: Título ECHOCORE -- Header: ECHOCORE title */
 .inicioHeader {
   width: 100%;
   margin-bottom: 10px;
@@ -49,7 +49,7 @@ body {
   margin-top: 90px;
 }
 
-/* Contenedor del canvas */
+/* Contenedor del canvas -- Canvas container */
 .inicioCanvas {
   display: flex;
   justify-content: center;
@@ -57,7 +57,7 @@ body {
   flex-grow: 1;
 }
 
-/* Texto "PRESS ENTER TO START" */
+/* Texto "PRESS ENTER TO START" -- Text "PRESS ENTER TO START" */
 .inicioFooter {
   width: 100%;
   margin-bottom: 70px;
@@ -72,7 +72,7 @@ body {
   animation: blink 1.5s infinite ease-in-out;
 }
 
-/* Animación de parpadeo */
+/* Animación de parpadeo -- Blinking animation */
 @keyframes blink {
   0% {
     opacity: 1;
@@ -95,7 +95,7 @@ canvas {
   transform: translate(-50%, -50%);
 }
 
-/* Contenedor del menú */
+/* Contenedor del menú -- Menu container */
 .menuContainer {
   display: flex;
   flex-direction: column;
@@ -116,14 +116,14 @@ canvas {
   position: relative;
 }
 
-/* Título del menú */
+/* Título del menú -- Menu title */
 .menuHeader h1 {
   font-size: 3rem;
   color: white;
   margin-bottom: 10px;
 }
 
-/* Sección de Menú */
+/* Sección de Menú -- Menu section */
 .menu {
   display: flex;
   justify-content: center;
@@ -131,7 +131,7 @@ canvas {
   height: 100vh;
 }
 
-/* Estilos para el botón de inicio */
+/* Estilos para el botón de inicio -- Start button styles */
 .buttomStar {
   display: flex;
   flex-direction: column;
@@ -171,7 +171,7 @@ canvas {
   font-size: 1.5rem;
 }
 
-/* Contenedor de los Power-Ups */
+/* Contenedor de los Power-Ups -- Power-Ups container */
 .menu_powerUps {
   display: flex;
   justify-content: space-between;
@@ -191,7 +191,7 @@ canvas {
   gap: 15px;
 }
 
-/* Contenedor de los Power-Ups */
+/* Contenedor de los Power-Ups (duplicado por error pero igual estilo) -- Power-Ups container (duplicated but same style) */
 .menu_powerUps {
   display: flex;
   justify-content: space-between;
@@ -218,22 +218,22 @@ canvas {
   text-align: center;
   transition: transform 0.3s ease-in-out, background-color 0.3s ease;
   display: flex;
-  flex-direction: column; /* Alinea todos los elementos verticalmente */
-  align-items: center;    /* Centra el contenido */
-  justify-content: space-between; /* Distribuye los elementos de manera uniforme */
-  height: 180px; /* Altura fija para asegurar consistencia */
-  width: 150px;  /* Ancho fijo */
+  flex-direction: column; /* Alinea todos los elementos verticalmente -- Aligns all elements vertically */
+  align-items: center;    /* Centra el contenido -- Centers the content */
+  justify-content: space-between; /* Distribuye los elementos de manera uniforme -- Evenly distributes the elements */
+  height: 180px; /* Altura fija para asegurar consistencia -- Fixed height for consistency */
+  width: 150px;  /* Ancho fijo -- Fixed width */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
 
 .menu_powerUps li img {
-  margin-bottom: 10px; /* Espacio entre la imagen y el texto */
+  margin-bottom: 10px; /* Espacio entre la imagen y el texto -- Space between image and text */
 }
 
 .menu_powerUps li span {
-  margin: 10px 0; /* Espacio entre el texto y el botón */
-  font-size: 1rem; /* Ajusta el tamaño del texto */
+  margin: 10px 0; /* Espacio entre el texto y el botón -- Space between text and button */
+  font-size: 1rem; /* Ajusta el tamaño del texto -- Adjusts text size */
 }
 
 .menu_powerUps li:hover {
@@ -255,21 +255,21 @@ canvas {
   background-color: #555;
 }
 
-/* Estilo para los puntos */
+/* Estilo para los puntos -- Style for the points */
 .menuContainer p {
-  margin-top: 20px; /* Space above points */
-  color: white; /* Keep the color */
+  margin-top: 20px; /* Espacio arriba de los puntos -- Space above points */
+  color: white; 
   margin-bottom: 15px;
-  text-align: center; /* Center the entire line */
+  text-align: center;
 }
 
-/* Remove extra styling from .points */
+/* Elimina estilos extra de .points -- Remove extra styling from .points */
 .points {
-  color: white; /* Keep the color */
-  font-size: 2.5rem; /* Font size for points */
+  color: white; 
+  font-size: 2.5rem;
 }
 
 .word {
   color: white;
-  font-size: 2.5rem; /* Font size for word */
+  font-size: 2.5rem;
 }
