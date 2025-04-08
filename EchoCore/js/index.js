@@ -319,6 +319,7 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
         } else if (currentLi.classList.contains('damage-lll')) {
             type = 'damage';
             nextLevel = 3;
+            costSpan.textContent = 'MAX'
         } else if (currentLi.classList.contains('speed-l')) {
             type = 'speed';
             nextLevel = 1;
@@ -328,6 +329,7 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
         } else if (currentLi.classList.contains('speed-lll')) {
             type = 'speed';
             nextLevel = 3;
+            costSpan.textContent = 'MAX'
         } else if (currentLi.classList.contains('columns-l')) {
             type = 'columns';
             nextLevel = 1;
@@ -337,10 +339,10 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
         } else if (currentLi.classList.contains('columns-lll')) {
             type = 'columns';
             nextLevel = 3;
+            costSpan.textContent = 'MAX'
         }
 
         if (upgrades[type] >= 3) {
-            costSpan.textContent = 'MAX';
             return;
         }
 
@@ -355,9 +357,7 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
         document.querySelector('.points').textContent = totalPoints;
 
         if (type === 'damage') {
-            if (currentLi.classList.contains('damage-lll')) {
-                costSpan.textContent = 'MAX';
-            } else if (currentLi.classList.contains('damage-l')) {
+            if (currentLi.classList.contains('damage-l')) {
                 currentLi.style.display = 'none';
                 document.querySelector('.damage-ll').style.display = 'block';
             } else if (currentLi.classList.contains('damage-ll')) {
@@ -365,9 +365,7 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
                 document.querySelector('.damage-lll').style.display = 'block';
             }
         } else if (type === 'speed') {
-            if (currentLi.classList.contains('speed-lll')) {
-                costSpan.textContent = 'MAX';
-            } else if (currentLi.classList.contains('speed-l')) {
+            if (currentLi.classList.contains('speed-l')) {
                 currentLi.style.display = 'none';
                 document.querySelector('.speed-ll').style.display = 'block';
             } else if (currentLi.classList.contains('speed-ll')) {
@@ -375,9 +373,7 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
                 document.querySelector('.speed-lll').style.display = 'block';
             }
         } else if (type === 'columns') {
-            if (currentLi.classList.contains('columns-lll')) {
-                costSpan.textContent = 'MAX';
-            } else if (currentLi.classList.contains('columns-l')) {
+            if (currentLi.classList.contains('columns-l')) {
                 currentLi.style.display = 'none';
                 document.querySelector('.columns-ll').style.display = 'block';
             } else if (currentLi.classList.contains('columns-ll')) {
