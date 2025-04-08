@@ -17,7 +17,6 @@ inicioCanvas.height = 500;
 let totalPoints = 0;
 
 let keys = {};
-// Detectar teclas presionadas y liberadas / Detect pressed and released keys
 window.addEventListener("keydown", (event) => (keys[event.key] = true));
 window.addEventListener("keyup", (event) => (keys[event.key] = false));
 
@@ -42,7 +41,6 @@ let animationFrameId = null;
 let shakeDuration = 0;
 const shakeIntensity = 3;
 
-// Colisión entre jugador y enemigo / Collision between player and enemy
 function checkPlayerEnemyCollision(player, enemy) {
     return (
         player.x < enemy.x + enemy.width &&
@@ -54,7 +52,6 @@ function checkPlayerEnemyCollision(player, enemy) {
 
 let enemyInterval;
 
-// Iniciar juego con tecla Enter / Start game with Enter key
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter' && !gameOver && !gameRunning) { 
         document.getElementById('inicio').style.display = 'none';
@@ -63,7 +60,6 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// Botón de inicio / Start button
 document.getElementById('startButton').addEventListener('click', function() {
     if (!gameRunning) { 
         document.getElementById('menu').style.display = 'none';
@@ -72,10 +68,9 @@ document.getElementById('startButton').addEventListener('click', function() {
     }
 });
 
-// Función para iniciar el juego / Function to start the game
 function startGame() {
     if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId); // Cancelar animación previa
+        cancelAnimationFrame(animationFrameId);
     }
 
     player = new Player();
@@ -88,9 +83,8 @@ function startGame() {
     gameRunning = true;
 
     if (enemyInterval) {
-        clearInterval(enemyInterval); // Limpiar intervalo anterior de enemigos
+        clearInterval(enemyInterval);
     }
-    // Spawnear enemigos cada 1.5 segundos / Spawn enemies every 1.5 seconds
     enemyInterval = setInterval(() => {
         if (!gameOver && !boss && score < 1000) {
             enemies.push(new Enemy());
@@ -100,7 +94,6 @@ function startGame() {
     runGame();
 }
 
-// Mostrar mensaje de concentración / Display tip for focus mode
 function drawTip(ctx, canvas) {
     if (showTip) {
         let opacity = isBlinking ? 1 : 0;
@@ -114,7 +107,6 @@ function drawTip(ctx, canvas) {
     }
 }
 
-// Lógica principal del juego / Main game logic
 function runGame() {
     if (gameOver) {
         clearInterval(enemyInterval);
@@ -135,16 +127,15 @@ function runGame() {
     if (shakeDuration > 0) {
         const shakeX = (Math.random() - 0.5) * shakeIntensity * 2;
         const shakeY = (Math.random() - 0.5) * shakeIntensity * 2;
-        ctx.translate(shakeX, shakeY); // Efecto de sacudida / Shake effect
+        ctx.translate(shakeX, shakeY);
         shakeDuration--;
     }
 
     drawTip(ctx, canvas);
     if (Date.now() - blinkStartTime > blinkDuration) {
-        showTip = false; // Dejar de mostrar el tip después de cierto tiempo
+        showTip = false;
     }
 
-    // Cambiar tamaño y velocidad del jugador si está en modo enfoque (J) / Change player size and speed in focus mode (J)
     if (keys['j']) {
         player.size = 20;
         player.speed = 2;
@@ -160,10 +151,9 @@ function runGame() {
     bullets.forEach((bullet, index) => {
         bullet.update();
         bullet.draw(ctx);
-        if (bullet.y < 0) bullets.splice(index, 1); // Eliminar balas fuera de la pantalla / Remove bullets outside the screen
+        if (bullet.y < 0) bullets.splice(index, 1);
     });
 
-    // Aparece jefe final cuando el score es alto / Boss appears when score is high
     if (score >= 1000 && !boss && !gameOver) {
         boss = new Boss();
         enemies = [];
@@ -178,16 +168,18 @@ function runGame() {
 
         bullets.forEach((bullet, bulletIndex) => {
             if (enemy.checkCollision(bullet)) {
-                enemy.exploding = true;
-                bullets.splice(bulletIndex, 1);
-                score += 100;
+                if (!enemy.exploding) { // Only score and explode if not already exploding
+                    enemy.exploding = true;
+                    score += 100;
+                }
+                bullets.splice(bulletIndex, 1); // Remove bullet regardless
             }
         });
 
         if (!enemy.exploding && checkPlayerEnemyCollision(player, enemy)) {
             player.lives--;
             enemy.exploding = true;
-            shakeDuration = 10; // Efecto de sacudida al colisionar / Shake effect on collision
+            shakeDuration = 10;
         }
     });
 
@@ -198,7 +190,7 @@ function runGame() {
             console.log("Boss defeated!");
             boss = null;
             gameOver = true;
-            score += 500; // Bonificación por derrotar al jefe / Bonus for defeating boss
+            score += 500;
         } else if (boss.exploding && shakeDuration === 0) {
             shakeDuration = 15;
         }
@@ -206,7 +198,7 @@ function runGame() {
         bullets.forEach((bullet, bulletIndex) => {
             if (boss && boss.checkCollision(bullet)) {
                 bullets.splice(bulletIndex, 1);
-                score += 50; // Incrementar puntos por impacto en el jefe / Increase score for hitting boss
+                score += 50;
                 if (boss.health <= 0 && !boss.exploding) {
                     boss.exploding = true;
                     shakeDuration = 15;
@@ -216,7 +208,7 @@ function runGame() {
 
         if (boss && !boss.exploding && checkPlayerEnemyCollision(player, boss)) {
             player.lives--;
-            shakeDuration = 10; // Efecto de sacudida al colisionar con el jefe / Shake effect on collision with boss
+            shakeDuration = 10;
         }
     }
 
@@ -224,7 +216,6 @@ function runGame() {
         bullet.update();
         bullet.draw(ctx);
 
-        // Eliminar balas fuera del canvas o expiradas / Remove bullets outside canvas or expired
         if (bullet instanceof BossBullet) {
             if (
                 (bullet.bounces >= bullet.maxBounces &&
@@ -244,7 +235,6 @@ function runGame() {
             }
         }
 
-        // Daño al jugador por bala / Player loses life from bullet hit
         if (
             bullet.x < player.x + player.width &&
             bullet.x + bullet.width > player.x &&
@@ -257,7 +247,6 @@ function runGame() {
         }
     });
 
-    // Dibujar corazones / Draw hearts representing player's lives
     for (let i = 0; i < player.lives; i++) {
         ctx.drawImage(heartImage, 10 + i * 40, 10, 80, 30);
     }
@@ -268,12 +257,11 @@ function runGame() {
 
     ctx.restore();
 
-    animationFrameId = requestAnimationFrame(runGame); // Solicitar siguiente fotograma / Request next frame
+    animationFrameId = requestAnimationFrame(runGame);
 }
 
 let angle = 0;
 function drawRotatingSquare() {
-    // Cuadro giratorio decorativo / Rotating decorative square
     inicioCtx.clearRect(0, 0, inicioCanvas.width, inicioCanvas.height);
     inicioCtx.translate(inicioCanvas.width / 2, inicioCanvas.height / 2);
     inicioCtx.rotate(angle);
@@ -295,7 +283,7 @@ function drawRotatingSquare() {
 
 function animate() {
     drawRotatingSquare();
-    requestAnimationFrame(animate); // Solicitar animación continua / Request continuous animation
+    requestAnimationFrame(animate);
 }
 
 animate();
@@ -303,11 +291,6 @@ blinkStartTime = Date.now();
 
 document.querySelector('.points').textContent = totalPoints;
 
-// Sistema de mejoras por botones / Upgrade system via buttons
-
-// Daño / Velocidad / Columnas
-
-// Manejar clic en botones de mejora / Handle clicks on upgrade buttons
 document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(button => {
     button.addEventListener('click', () => {
         const currentLi = button.closest('li');
