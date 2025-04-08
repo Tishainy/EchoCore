@@ -16,9 +16,21 @@ inicioCanvas.height = 500;
 
 let totalPoints = 0;
 
+let upgrades = {
+    damage: 0,
+    speed: 0,
+    columns: 0
+};
+
+const powerupCosts = {
+    damage: [1000, 1000, 1000],
+    speed: [1000, 1000, 1000],
+    columns: [1000, 1000, 1000]
+};
+
 let keys = {};
-window.addEventListener("keydown", (event) => (keys[event.key] = true));
-window.addEventListener("keyup", (event) => (keys[event.key] = false));
+window.addEventListener("keydown", (event) => { keys[event.key] = true; });
+window.addEventListener("keyup", (event) => { keys[event.key] = false; });
 
 let player;
 let bullets = [];
@@ -53,7 +65,7 @@ function checkPlayerEnemyCollision(player, enemy) {
 let enemyInterval;
 
 document.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter' && !gameOver && !gameRunning) { 
+    if (event.key === 'Enter' && !gameOver && !gameRunning) {
         document.getElementById('inicio').style.display = 'none';
         document.getElementById('game').style.display = 'block';
         startGame();
@@ -61,7 +73,7 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.getElementById('startButton').addEventListener('click', function() {
-    if (!gameRunning) { 
+    if (!gameRunning) {
         document.getElementById('menu').style.display = 'none';
         document.getElementById('game').style.display = 'block';
         startGame();
@@ -74,6 +86,8 @@ function startGame() {
     }
 
     player = new Player();
+    player.damageLevel = 1 + upgrades.damage;
+    player.columns = 1 + upgrades.columns;
     bullets = [];
     enemyBullets = [];
     enemies = [];
@@ -86,7 +100,7 @@ function startGame() {
         clearInterval(enemyInterval);
     }
     enemyInterval = setInterval(() => {
-        if (!gameOver && !boss && score < 1000) {
+        if (!gameOver && !boss && score < 1000 && enemies.length < 5) { // Cap at 5 enemies
             enemies.push(new Enemy());
         }
     }, 1500);
@@ -144,7 +158,7 @@ function runGame() {
         player.speed = 4;
     }
 
-    shootCooldown = player.update(keys, shootCooldown, bullets, canvas);
+    shootCooldown = player.update(keys, shootCooldown, bullets, canvas, upgrades.speed);
     player.draw(ctx);
     if (player.lives <= 0) gameOver = true;
 
@@ -168,11 +182,11 @@ function runGame() {
 
         bullets.forEach((bullet, bulletIndex) => {
             if (enemy.checkCollision(bullet)) {
-                if (!enemy.exploding) { // Only score and explode if not already exploding
+                if (!enemy.exploding) {
                     enemy.exploding = true;
                     score += 100;
                 }
-                bullets.splice(bulletIndex, 1); // Remove bullet regardless
+                bullets.splice(bulletIndex, 1);
             }
         });
 
@@ -197,8 +211,11 @@ function runGame() {
 
         bullets.forEach((bullet, bulletIndex) => {
             if (boss && boss.checkCollision(bullet)) {
+                boss.health -= bullet.damage;
+                if (!boss.exploding) {
+                    score += 50; // Only award points if not exploding
+                }
                 bullets.splice(bulletIndex, 1);
-                score += 50;
                 if (boss.health <= 0 && !boss.exploding) {
                     boss.exploding = true;
                     shakeDuration = 15;
@@ -263,6 +280,7 @@ function runGame() {
 let angle = 0;
 function drawRotatingSquare() {
     inicioCtx.clearRect(0, 0, inicioCanvas.width, inicioCanvas.height);
+    inicioCtx.save();
     inicioCtx.translate(inicioCanvas.width / 2, inicioCanvas.height / 2);
     inicioCtx.rotate(angle);
     inicioCtx.shadowColor = "rgba(0, 0, 0, 0.5)";
@@ -272,12 +290,7 @@ function drawRotatingSquare() {
     inicioCtx.strokeStyle = "black";
     inicioCtx.lineWidth = 24;
     inicioCtx.strokeRect(-75, -75, 150, 150);
-    inicioCtx.shadowColor = "transparent";
-    ctx.shadowBlur = 0;
-    inicioCtx.shadowOffsetX = 0;
-    inicioCtx.shadowOffsetY = 0;
-    inicioCtx.rotate(-angle);
-    inicioCtx.translate(-inicioCanvas.width / 2, -inicioCanvas.height / 2);
+    inicioCtx.restore();
     angle += 0.01;
 }
 
@@ -294,36 +307,77 @@ document.querySelector('.points').textContent = totalPoints;
 document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(button => {
     button.addEventListener('click', () => {
         const currentLi = button.closest('li');
-        const spanText = button.querySelector('.max');
+        const costSpan = button.querySelector('.max');
+        let type, nextLevel;
 
-        if (currentLi.classList.contains('damage-lll')) {
-            spanText.textContent = 'MAX';
-        } else {
-            if (currentLi.classList.contains('damage-l')) {
+        if (currentLi.classList.contains('damage-l')) {
+            type = 'damage';
+            nextLevel = 1;
+        } else if (currentLi.classList.contains('damage-ll')) {
+            type = 'damage';
+            nextLevel = 2;
+        } else if (currentLi.classList.contains('damage-lll')) {
+            type = 'damage';
+            nextLevel = 3;
+        } else if (currentLi.classList.contains('speed-l')) {
+            type = 'speed';
+            nextLevel = 1;
+        } else if (currentLi.classList.contains('speed-ll')) {
+            type = 'speed';
+            nextLevel = 2;
+        } else if (currentLi.classList.contains('speed-lll')) {
+            type = 'speed';
+            nextLevel = 3;
+        } else if (currentLi.classList.contains('columns-l')) {
+            type = 'columns';
+            nextLevel = 1;
+        } else if (currentLi.classList.contains('columns-ll')) {
+            type = 'columns';
+            nextLevel = 2;
+        } else if (currentLi.classList.contains('columns-lll')) {
+            type = 'columns';
+            nextLevel = 3;
+        }
+
+        if (upgrades[type] >= 3) {
+            costSpan.textContent = 'MAX';
+            return;
+        }
+
+        const cost = powerupCosts[type][nextLevel - 1];
+        if (totalPoints < cost) {
+            console.log(`Not enough points for ${type} level ${nextLevel}! Need ${cost}, have ${totalPoints}`);
+            return;
+        }
+
+        totalPoints -= cost;
+        upgrades[type] = nextLevel;
+        document.querySelector('.points').textContent = totalPoints;
+
+        if (type === 'damage') {
+            if (currentLi.classList.contains('damage-lll')) {
+                costSpan.textContent = 'MAX';
+            } else if (currentLi.classList.contains('damage-l')) {
                 currentLi.style.display = 'none';
                 document.querySelector('.damage-ll').style.display = 'block';
             } else if (currentLi.classList.contains('damage-ll')) {
                 currentLi.style.display = 'none';
                 document.querySelector('.damage-lll').style.display = 'block';
             }
-        }
-
-        if (currentLi.classList.contains('speed-lll')) {
-            spanText.textContent = 'MAX';
-        } else {
-            if (currentLi.classList.contains('speed-l')) {
+        } else if (type === 'speed') {
+            if (currentLi.classList.contains('speed-lll')) {
+                costSpan.textContent = 'MAX';
+            } else if (currentLi.classList.contains('speed-l')) {
                 currentLi.style.display = 'none';
                 document.querySelector('.speed-ll').style.display = 'block';
             } else if (currentLi.classList.contains('speed-ll')) {
                 currentLi.style.display = 'none';
                 document.querySelector('.speed-lll').style.display = 'block';
             }
-        }
-
-        if (currentLi.classList.contains('columns-lll')) {
-            spanText.textContent = 'MAX';
-        } else {
-            if (currentLi.classList.contains('columns-l')) {
+        } else if (type === 'columns') {
+            if (currentLi.classList.contains('columns-lll')) {
+                costSpan.textContent = 'MAX';
+            } else if (currentLi.classList.contains('columns-l')) {
                 currentLi.style.display = 'none';
                 document.querySelector('.columns-ll').style.display = 'block';
             } else if (currentLi.classList.contains('columns-ll')) {
@@ -331,5 +385,7 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
                 document.querySelector('.columns-lll').style.display = 'block';
             }
         }
+
+        console.log(`Purchased ${type} level ${nextLevel} for ${cost} points. Remaining: ${totalPoints}`);
     });
 });
