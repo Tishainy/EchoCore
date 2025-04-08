@@ -7,23 +7,17 @@ export class Player {
         // Posición inicial del jugador / Initial player position
         this.x = 240;
         this.y = 240;
-
         // Tamaño del jugador / Player size
         this.width = 20;
         this.height = 20;
-
         // Vidas del jugador / Player lives
         this.lives = 3;
-
         // Velocidad de movimiento / Movement speed
         this.speed = 2;
-
         // Rotación para efecto visual / Rotation for visual effect
         this.rotation = 0;
-
         // Si "j" está presionada / If "j" is pressed
         this.isJPressed = false;
-
         // Nivel de daño / Damage level
         this.damageLevel = 1;
     }
