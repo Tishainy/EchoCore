@@ -53,9 +53,9 @@ export class Player {
         ctx.save();
         ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
         ctx.rotate(this.rotation);
-        ctx.strokeStyle = "black";
+        ctx.strokeStyle = "white";
         ctx.lineWidth = 3;
-        ctx.shadowColor = "rgba(0, 0, 0, 0.4)";
+        ctx.shadowColor = "rgba(255, 255, 255, 0.38";
         ctx.shadowOffsetX = 10;
         ctx.shadowOffsetY = 10;
         ctx.shadowBlur = 10;

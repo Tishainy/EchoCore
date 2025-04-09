@@ -75,7 +75,7 @@ export class Enemy {
         } else {
             let gradient = ctx.createLinearGradient(0, 0, this.width, this.height); // Gradient effect for enemy color // Efecto de gradiente para el color del enemigo
             gradient.addColorStop(1, "white"); // Add color stop to gradient // Agregar un punto de color al gradiente
-            gradient.addColorStop(0, "black"); // Add color stop to gradient // Agregar un punto de color al gradiente
+            gradient.addColorStop(0, "gray"); // Add color stop to gradient // Agregar un punto de color al gradiente
             ctx.translate(this.x + this.width / 2, this.y + this.height / 2); // Move to the center of the enemy // Mover al centro del enemigo
             ctx.rotate(this.rotation); // Rotate enemy for animation // Rotar al enemigo para la animación
             ctx.fillStyle = gradient; // Set fill style to gradient // Establecer el estilo de relleno al gradiente
@@ -153,7 +153,7 @@ export class Boss {
         if (this.exploding) {
             ctx.translate(this.x + this.width / 2, this.y + this.height / 2); // Move to the center of the boss // Mover al centro del jefe
             ctx.rotate(this.rotation); // Rotate according to the rotation angle // Rotar según el ángulo de rotación
-            ctx.strokeStyle = `rgba(255, 0, 0, ${this.opacity})`; // Explosion color and opacity // Color y opacidad de la explosión
+            ctx.strokeStyle = `rgba(128, 128, 128, ${this.opacity})`; // Explosion color and opacity // Color y opacidad de la explosión
             ctx.lineWidth = 5;
             ctx.strokeRect(
                 -this.width / 2 - this.explosionSize / 2, // Draw explosion border // Dibujar el borde de la explosión
@@ -163,8 +163,8 @@ export class Boss {
             );
         } else {
             let gradient = ctx.createLinearGradient(0, 0, this.width, this.height); // Gradient effect for boss color // Efecto de gradiente para el color del jefe
-            gradient.addColorStop(0, "red"); // Add color stop to gradient // Agregar un punto de color al gradiente
-            gradient.addColorStop(1, "black"); // Add color stop to gradient // Agregar un punto de color al gradiente
+            gradient.addColorStop(0, "gray"); // Add color stop to gradient // Agregar un punto de color al gradiente
+            gradient.addColorStop(1, "white"); // Add color stop to gradient // Agregar un punto de color al gradiente
             ctx.translate(this.x + this.width / 2, this.y + this.height / 2); // Move to the center of the boss // Mover al centro del jefe
             ctx.rotate(this.rotation); // Rotate boss for animation // Rotar al jefe para la animación
             ctx.fillStyle = gradient; // Set fill style to gradient // Establecer el estilo de relleno al gradiente

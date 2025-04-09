@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0%;
   padding: 0%;
-  font-family: "Jersey 20", sans-serif; /* Mantiene la fuente Jersey 20 -- Keeps the Jersey 20 font */
+  font-family: "Jersey 20", sans-serif; /* Mantiene la fuente Jersey 20 */
   font-size: 16px;
 }
 
@@ -12,9 +12,21 @@ body {
   height: 100%;
   margin: 0;
   background-attachment: fixed;
+  color: white; /* Texto blanco en todo el sitio */
 }
 
-/* Estilo para la sección #inicio -- Style for the #inicio section */
+/* Estilo para el video de fondo */
+#background-video {
+  position: fixed; /* Fija el video en el fondo */
+  top: 0;
+  left: 0;
+  width: 100%; /* Asegura que el video cubra toda la pantalla */
+  height: 100%; /* Asegura que el video cubra toda la pantalla */
+  object-fit: cover; /* Hace que el video cubra todo el fondo sin distorsionarse */
+  z-index: -1; /* Asegura que el video esté detrás de otros contenidos */
+}
+
+/* Estilo para la sección #inicio */
 .inicio {
   display: flex;
   justify-content: center;
@@ -22,11 +34,11 @@ body {
   height: 100vh;
 }
 
-/* Contenedor principal -- Main container */
+/* Contenedor principal */
 .inicioContainer {
   width: 800px;
   height: 90%;
-  background-color: #ababab;
+  background-color: rgba(50, 50, 50, 0.7); /* Fondo gris oscuro */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -34,9 +46,10 @@ body {
   text-align: center;
   border-radius: 10px;
   padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6); /* Sombra oscura */
 }
 
-/* Header: Título ECHOCORE -- Header: ECHOCORE title */
+/* Header: Título ECHOCORE */
 .inicioHeader {
   width: 100%;
   margin-bottom: 10px;
@@ -44,12 +57,12 @@ body {
 
 .inicioHeader h1 {
   font-size: 3rem;
-  color: #212121;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: white; /* Título en blanco */
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
   margin-top: 90px;
 }
 
-/* Contenedor del canvas -- Canvas container */
+/* Contenedor del canvas */
 .inicioCanvas {
   display: flex;
   justify-content: center;
@@ -57,7 +70,7 @@ body {
   flex-grow: 1;
 }
 
-/* Texto "PRESS ENTER TO START" -- Text "PRESS ENTER TO START" */
+/* Texto "PRESS ENTER TO START" */
 .inicioFooter {
   width: 100%;
   margin-bottom: 70px;
@@ -66,13 +79,13 @@ body {
 }
 
 .inicioFooter p {
-  color: #212121;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: white; /* Texto blanco */
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
   font-size: 1.2rem;
   animation: blink 1.5s infinite ease-in-out;
 }
 
-/* Animación de parpadeo -- Blinking animation */
+/* Animación de parpadeo */
 @keyframes blink {
   0% {
     opacity: 1;
@@ -91,11 +104,12 @@ canvas {
   position: absolute;
   top: 50%;
   left: 50%;
-  box-shadow: 3px 5px 7px #00000061;
+  box-shadow: 3px 5px 7px rgba(255, 255, 255, 0.2);
   transform: translate(-50%, -50%);
+  border: 3px solid rgba(255, 255, 255, 0.5); /* Borde sutil blanco */
 }
 
-/* Contenedor del menú -- Menu container */
+/* Contenedor del menú */
 .menuContainer {
   display: flex;
   flex-direction: column;
@@ -104,7 +118,7 @@ canvas {
   text-align: center;
   padding: 20px;
   gap: 20px;
-  background-color: #ababab;
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo negro semi-translúcido */
   width: 800px;
   height: 90%;
   border-radius: 10px;
@@ -116,14 +130,14 @@ canvas {
   position: relative;
 }
 
-/* Título del menú -- Menu title */
+/* Título del menú */
 .menuHeader h1 {
   font-size: 3rem;
-  color: white;
+  color: white; /* Título en blanco */
   margin-bottom: 10px;
 }
 
-/* Sección de Menú -- Menu section */
+/* Sección de Menú */
 .menu {
   display: flex;
   justify-content: center;
@@ -131,7 +145,7 @@ canvas {
   height: 100vh;
 }
 
-/* Estilos para el botón de inicio -- Start button styles */
+/* Estilos para el botón de inicio */
 .buttomStar {
   display: flex;
   flex-direction: column;
@@ -142,33 +156,36 @@ canvas {
 #startButton {
   padding: 20px 40px;
   font-size: 2rem;
-  background-color: #7f7f7f;
-  color: white;
+  background-color: #555; /* Gris oscuro */
+  color: white; /* Texto blanco */
   border: none;
   border-radius: 10px;
   cursor: pointer;
   animation: blink 1.5s infinite;
   transition: background-color 0.3s;
 }
+
 #startButton:hover {
-  background-color: #555;
+  background-color: #333; /* Gris más oscuro */
 }
+
 #restartButton {
   padding: 20px 40px;
   font-size: 2rem;
-  background-color: #7f7f7f;
-  color: white;
+  background-color: #555; /* Gris oscuro */
+  color: white; /* Texto blanco */
   border: none;
   border-radius: 10px;
   cursor: pointer;
   animation: blink 1.5s infinite;
   transition: background-color 0.3s;
 }
-#restarButton:hover {
-  background-color: #555;
+
+#restartButton:hover {
+  background-color: #333; /* Gris más oscuro */
 }
 
-
+/* Animación de parpadeo */
 @keyframes blink {
   0%,
   100% {
@@ -181,11 +198,11 @@ canvas {
 
 .buttomStar h3 {
   margin-top: 30px;
-  color: white;
+  color: white; /* Texto blanco */
   font-size: 1.5rem;
 }
 
-/* Contenedor de los Power-Ups -- Power-Ups container */
+/* Contenedor de los Power-Ups */
 .menu_powerUps {
   display: flex;
   justify-content: space-between;
@@ -206,11 +223,11 @@ canvas {
 }
 
 .menu_powerUps li {
-  background: linear-gradient(to bottom, #7f7f7f, #555);
+  background: linear-gradient(to bottom, #333, #555); /* Fondo gris oscuro */
   border-radius: 15px;
   padding: 20px;
   text-align: center;
-  transition: transform 0.3s ease-in-out, background 0.5s ease-in-out; /* Slower background transition */
+  transition: transform 0.3s ease-in-out, background 0.5s ease-in-out;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -219,27 +236,27 @@ canvas {
   width: 150px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
   overflow: hidden;
-  position: relative; /* For positioning the ::after text */
+  position: relative;
 }
 
 .menu_powerUps li img {
-  margin-bottom: 10px; /* Espacio entre la imagen y el texto -- Space between image and text */
+  margin-bottom: 10px;
 }
 
 .menu_powerUps li span {
-  margin: 10px 0; /* Espacio entre el texto y el botón -- Space between text and button */
-  font-size: 1rem; /* Ajusta el tamaño del texto -- Adjusts text size */
+  margin: 10px 0;
+  font-size: 1rem;
 }
 
 .menu_powerUps li:hover {
   transform: translateY(-5px);
-  background-color: #444;
+  background-color: #444; /* Gris más claro */
 }
 
 .menu_powerUps button {
   padding: 8px 14px;
-  background-color: #333;
-  color: white;
+  background-color: #333; /* Fondo oscuro */
+  color: white; /* Texto blanco */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -247,41 +264,39 @@ canvas {
 }
 
 .menu_powerUps button:hover {
-  background-color: #555;
+  background-color: #444; /* Gris más claro al pasar el cursor */
 }
 
-/* Estilo para los puntos -- Style for the points */
+/* Estilo para los puntos */
 .menuContainer p {
-  margin-top: 20px; /* Espacio arriba de los puntos -- Space above points */
-  color: white; 
+  margin-top: 20px;
+  color: white; /* Texto blanco */
   margin-bottom: 15px;
   text-align: center;
 }
 
-/* Elimina estilos extra de .points -- Remove extra styling from .points */
 .points {
-  color: white; 
+  color: white; /* Texto blanco */
   font-size: 2.5rem;
 }
 
 .word {
-  color: white;
+  color: white; /* Texto blanco */
   font-size: 2.5rem;
 }
 
-/* Insufficient points effect - Higher specificity and slower transition */
+/* Insufficient points effect */
 .menu_powerUps li.insufficient {
   background: linear-gradient(to bottom, rgba(255, 0, 0, 0.7), rgba(200, 0, 0, 0.7)) !important;
-  transition: background 0.5s ease-in-out; /* Slower ease in/out for red tint */
 }
 
 .menu_powerUps li.insufficient::after {
   content: "Insufficient Funds";
   position: absolute;
-  bottom: -30px; /* Position below the box */
+  bottom: -30px;
   left: 50%;
   transform: translateX(-50%);
-  color: red;
+  color: red; /* Texto rojo */
   font-size: 0.9rem;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   opacity: 0;
@@ -289,7 +304,7 @@ canvas {
 }
 
 .menu_powerUps li.insufficient.show-text::after {
-  opacity: 1; /* Show text when .show-text is added */
+  opacity: 1;
 }
 
 /* Shake animation */
@@ -302,5 +317,5 @@ canvas {
 }
 
 .menu_powerUps li.shaking {
-  animation: shake 0.3s ease; /* Shake for 0.3 seconds */
+  animation: shake 0.3s ease;
 }

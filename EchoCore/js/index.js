@@ -330,11 +330,11 @@ function drawRotatingSquare() {
     inicioCtx.save();
     inicioCtx.translate(inicioCanvas.width / 2, inicioCanvas.height / 2);
     inicioCtx.rotate(angle);
-    inicioCtx.shadowColor = "rgba(0, 0, 0, 0.5)";
+    inicioCtx.shadowColor = "rgba(255, 255, 255, 0.2)";
     inicioCtx.shadowBlur = 7;
     inicioCtx.shadowOffsetX = 35;
     inicioCtx.shadowOffsetY = 35;
-    inicioCtx.strokeStyle = "black";
+    inicioCtx.strokeStyle = "gray";
     inicioCtx.lineWidth = 24;
     inicioCtx.strokeRect(-75, -75, 150, 150);
     inicioCtx.restore();
