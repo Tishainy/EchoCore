@@ -68,9 +68,18 @@ document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter' && !gameOver && !gameRunning) {
         document.getElementById('inicio').style.display = 'none';
         document.getElementById('game').style.display = 'block';
+
+        // Música de fondo
+        const music = document.getElementById("bg-music");
+        music.volume = 0.2;
+        music.play().catch(() => {
+            console.log("El navegador bloqueó el autoplay. Necesita interacción.");
+        });
+
         startGame();
     }
 });
+
 document.getElementById('startButton').addEventListener('click', function() {
     if (!gameRunning) {
         document.getElementById('menu').style.display = 'none';
