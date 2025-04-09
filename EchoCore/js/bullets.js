@@ -50,8 +50,8 @@ export class BossBullet extends EnemyBullet {
         this.lifetime = 7000; // Full lifetime as fallback
         this.fadeStartTime = null; // Time when fade *starts* (after delay)
         this.firstBounceTime = null; // Time of first bounce
-        this.delayBeforeFade = 2000; // 1.8 seconds delay before fading starts
-        this.fadeDuration = 50; // 0.05 seconds to fade out
+        this.delayBeforeFade = 1800; // 1.8 seconds delay before fading starts
+        this.fadeDuration = 100; // 0.1 seconds to fade out
         this.opacity = 1; // Start fully opaque
     }
 
@@ -102,13 +102,13 @@ export class BossBullet extends EnemyBullet {
         if (this.firstBounceTime && !this.fadeStartTime) {
             const timeSinceFirstBounce = Date.now() - this.firstBounceTime;
             if (timeSinceFirstBounce >= this.delayBeforeFade) {
-                this.fadeStartTime = Date.now(); // Start fading after 5 seconds
+                this.fadeStartTime = Date.now(); // Start fading after 1.8 seconds
             }
         }
 
         if (this.fadeStartTime) {
             const timeSinceFade = Date.now() - this.fadeStartTime;
-            this.opacity = Math.max(0, 1 - timeSinceFade / this.fadeDuration); // Fade from 1 to 0 over 0.5s
+            this.opacity = Math.max(0, 1 - timeSinceFade / this.fadeDuration); // Fade from 1 to 0 over 0.1s
         }
 
         // Normalize angle to stay within 0 to 2π
@@ -118,7 +118,7 @@ export class BossBullet extends EnemyBullet {
 
     draw(ctx) {
         ctx.save();
-        ctx.fillStyle = `rgba(128, 0, 128, ${this.opacity})`; // Purple with opacity
+        ctx.fillStyle = `rgba(0, 0, 255, ${this.opacity})`; // Blue with opacity
         ctx.fillRect(this.x, this.y, this.width, this.height);
         ctx.restore();
     }
