@@ -319,7 +319,7 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
         } else if (currentLi.classList.contains('damage-lll')) {
             type = 'damage';
             nextLevel = 3;
-            costSpan.textContent = 'MAX'
+            costSpan.textContent = 'MAX';
         } else if (currentLi.classList.contains('speed-l')) {
             type = 'speed';
             nextLevel = 1;
@@ -329,7 +329,7 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
         } else if (currentLi.classList.contains('speed-lll')) {
             type = 'speed';
             nextLevel = 3;
-            costSpan.textContent = 'MAX'
+            costSpan.textContent = 'MAX';
         } else if (currentLi.classList.contains('columns-l')) {
             type = 'columns';
             nextLevel = 1;
@@ -339,7 +339,7 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
         } else if (currentLi.classList.contains('columns-lll')) {
             type = 'columns';
             nextLevel = 3;
-            costSpan.textContent = 'MAX'
+            costSpan.textContent = 'MAX';
         }
 
         if (upgrades[type] >= 3) {
@@ -349,6 +349,11 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
         const cost = powerupCosts[type][nextLevel - 1];
         if (totalPoints < cost) {
             console.log(`Not enough points for ${type} level ${nextLevel}! Need ${cost}, have ${totalPoints}`);
+            // Apply red flash and shake effect to the <li> element
+            currentLi.classList.add('insufficient', 'shaking');
+            setTimeout(() => {
+                currentLi.classList.remove('insufficient', 'shaking');
+            }, 300); // Remove after 0.3 seconds (matches shake duration)
             return;
         }
 

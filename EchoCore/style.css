@@ -191,26 +191,6 @@ canvas {
   gap: 15px;
 }
 
-/* Contenedor de los Power-Ups (duplicado por error pero igual estilo) -- Power-Ups container (duplicated but same style) */
-.menu_powerUps {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  width: 100%;
-  max-width: 800px;
-}
-
-.menu_powerUps ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-
 .menu_powerUps li {
   background: linear-gradient(to bottom, #7f7f7f, #555);
   border-radius: 15px;
@@ -272,4 +252,23 @@ canvas {
 .word {
   color: white;
   font-size: 2.5rem;
+}
+
+/* Insufficient points effect */
+.insufficient {
+  background: linear-gradient(to bottom, rgba(255, 0, 0, 0.7), rgba(200, 0, 0, 0.7)); /* Red tint */
+  transition: background 0.2s ease; /* Smooth transition for color */
+}
+
+/* Shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.shaking {
+  animation: shake 0.3s ease; /* Shake for 0.3 seconds */
 }
