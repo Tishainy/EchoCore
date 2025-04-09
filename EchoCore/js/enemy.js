@@ -4,44 +4,59 @@ console.log("Enemy module loaded"); // Enemy module loaded // Módulo de enemigo
 
 export class Enemy {
     constructor() {
-        this.x = Math.random() * (500 - 40); // Random horizontal position // Posición horizontal aleatoria
-        this.y = -40; // Start above the canvas // Comienza encima del lienzo
-        this.width = 30; // Width of the enemy // Ancho del enemigo
-        this.height = 30; // Height of the enemy // Altura del enemigo
-        this.baseSpeed = 1 + Math.random(); // Random speed between 1 and 2 // Velocidad aleatoria entre 1 y 2
-        this.speed = this.baseSpeed; // Initial speed // Velocidad inicial
-        this.rotation = 0; // Initial rotation angle // Ángulo de rotación inicial
-        this.shootCooldown = 0; // Initial cooldown for shooting // Enfriamiento inicial para disparar
-        this.exploding = false; // Flag for explosion state // Bandera para el estado de explosión
-        this.explosionSize = 0; // Initial explosion size // Tamaño inicial de la explosión
-        this.opacity = 1; // Initial opacity for fading out during explosion // Opacidad inicial para desvanecerse durante la explosión
+        this.x = Math.random() * (500 - 40); // Posición horizontal aleatoria
+        this.y = -40; // Comienza encima del lienzo
+        this.width = 30; // Ancho del enemigo
+        this.height = 30; // Altura del enemigo
+        this.baseSpeed = 1 + Math.random(); // Velocidad aleatoria entre 1 y 2
+        this.speed = this.baseSpeed; // Velocidad inicial
+        this.rotation = 0; // Ángulo de rotación inicial
+        this.shootCooldown = 0; // Enfriamiento inicial para disparar
+        this.exploding = false; // Bandera para el estado de explosión
+        this.explosionSize = 0; // Tamaño inicial de la explosión
+        this.opacity = 1; // Opacidad inicial para desvanecerse durante la explosión
+        this.hasPlayedSound = false; // Bandera para controlar si el sonido ya se ha reproducido
     }
 
     update(player, enemyBullets, canvas, isSlowMotion) {
         if (isSlowMotion) {
-            this.speed = this.baseSpeed * 0.5; // Halve speed during slow motion // Reducir la velocidad a la mitad durante la cámara lenta
+            this.speed = this.baseSpeed * 0.5; // Reducir la velocidad a la mitad durante la cámara lenta
         } else {
-            this.speed = this.baseSpeed; // Normal speed // Velocidad normal
+            this.speed = this.baseSpeed; // Velocidad normal
         }
 
         if (this.exploding) {
-            this.explosionSize += 2; // Increase explosion size // Aumentar el tamaño de la explosión
-            this.opacity -= 0.02; // Decrease opacity over time // Disminuir la opacidad con el tiempo
-            return this.opacity <= 0; // If opacity is 0, return true to indicate death // Si la opacidad es 0, devolver verdadero para indicar muerte
+            this.explosionSize += 3;
+            this.opacity -= 0.01;
+        
+            if (!this.hasPlayedDeathSound) {
+                const bossDeadSound = new Audio('./music/enemyDead.mp3');
+                bossDeadSound.volume = 0.9;
+                bossDeadSound.play().catch(() => {
+                    console.log("El navegador bloqueó el autoplay. Necesita interacción.");
+                });
+                this.hasPlayedDeathSound = true;
+            }
+        
+            return this.opacity <= 0;
         }
 
-        this.y += this.speed; // Move the enemy down // Mover al enemigo hacia abajo
-        this.rotation += 0.05; // Rotate enemy for animation // Rotar al enemigo para animación
-        if (this.rotation >= 2 * Math.PI) this.rotation = 0; // Reset rotation after a full circle // Reiniciar la rotación después de un círculo completo
+        this.y += this.speed; // Mover al enemigo hacia abajo
+        this.rotation += 0.05; // Rotar al enemigo para animación
+        if (this.y > canvas.height && !this.hasPlayedDeathSound) {
+            this.playDeathSound();  // Reproducir el sonido de muerte
+            this.hasPlayedDeathSound = false; // Marcar que el sonido ya ha sido reproducido
+        }
+        if (this.rotation >= 2 * Math.PI) this.rotation = 0; // Reiniciar la rotación después de un círculo completo
 
         if (this.shootCooldown <= 0) {
-            this.shoot(player, enemyBullets); // Shoot if cooldown is over // Disparar si el tiempo de recarga ha terminado
-            this.shootCooldown = 1000; // Reset cooldown // Restablecer tiempo de recarga
+            this.shoot(player, enemyBullets); // Disparar si el tiempo de recarga ha terminado
+            this.shootCooldown = 1000; // Restablecer el tiempo de recarga
         } else {
-            this.shootCooldown -= 10; // Reduce cooldown over time // Reducir el tiempo de recarga con el tiempo
+            this.shootCooldown -= 10; // Reducir el tiempo de recarga con el tiempo
         }
 
-        return this.y > canvas.height; // Return true if enemy is out of screen // Devolver verdadero si el enemigo está fuera de la pantalla
+        return this.y > canvas.height; // Retornar verdadero si el enemigo está fuera de la pantalla
     }
 
     draw(ctx) {
@@ -160,14 +175,25 @@ export class Boss {
 
     checkCollision(bullet) {
         const hit = (
-            bullet.x < this.x + this.width && // Check if bullet is within boss's boundaries // Verificar si la bala está dentro de los límites del jefe
+            bullet.x < this.x + this.width && // Verificar si la bala está dentro de los límites del jefe
             bullet.x + bullet.width > this.x &&
             bullet.y < this.y + this.height &&
             bullet.y + bullet.height > this.y
         );
+        
         if (hit && !this.exploding) {
-            this.health -= 10; // Reduce boss health // Reducir la salud del jefe
-            if (this.health <= 0) this.exploding = true; // Trigger explosion if health is 0 // Activar explosión si la salud es 0
+            this.health -= 10; // Reducir la salud del jefe
+            
+            // Reproducir el sonido de golpe del jefe (solo al recibir un golpe)
+            const bossHitSound = new Audio('./music/bossHit.mp3');
+            bossHitSound.volume = 0.1; // Ajusta el volumen si es necesario
+            bossHitSound.play().catch(() => {
+                console.log("El navegador bloqueó el autoplay. Necesita interacción.");
+            });
+        
+            if (this.health <= 0 && !this.exploding) {
+                this.exploding = true; // Activar la explosión si la salud llega a 0
+            }
         }
         return hit;
     }

@@ -8,6 +8,17 @@ export class Bullet {
         this.height = 10;
         this.speed = 5;
         this.damage = 10;
+
+        // Reproducir el sonido al disparar
+        this.playShootSound();
+    }
+
+    playShootSound() {
+        const shootSound = new Audio('./music/shoot.mp3'); // Asegúrate de que el archivo de sonido esté en la ruta correcta
+        shootSound.volume = 0.1; // Ajusta el volumen como desees
+        shootSound.play().catch(() => {
+            console.log("El navegador bloqueó el autoplay. Necesita interacción.");
+        });
     }
 
     update() {

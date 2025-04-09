@@ -71,7 +71,7 @@ document.addEventListener('keydown', function(event) {
 
         // Música de fondo
         const music = document.getElementById("bg-music");
-        music.volume = 0.2;
+        music.volume = 0.5;
         music.play().catch(() => {
             console.log("El navegador bloqueó el autoplay. Necesita interacción.");
         });
@@ -303,6 +303,11 @@ function runGame() {
             player.lives--;
             enemyBullets.splice(index, 1);
             shakeDuration = 10;
+            const hurtSound = new Audio('./music/hurt.mp3'); // Asegúrate de que el archivo esté en la ruta correcta
+            hurtSound.volume = 0.8; // Ajusta el volumen si es necesario
+            hurtSound.play().catch(() => {
+            console.log("El navegador bloqueó el autoplay. Necesita interacción.");
+        });
         }
     });
 
@@ -354,7 +359,7 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
 
         if (currentLi.classList.contains('damage-l')) {
             type = 'damage';
-            nextLevel = 1;
+            nextLevel = 1;           
         } else if (currentLi.classList.contains('damage-ll')) {
             type = 'damage';
             nextLevel = 2;
@@ -395,12 +400,26 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
             setTimeout(() => {
                 currentLi.classList.remove('insufficient', 'shaking');
             }, 300);
+
+            // Reproducir el sonido 'nopowerups.mp3' si no tienes suficientes puntos
+            const noPowerUpSound = new Audio('./music/noPoints.mp3');
+            noPowerUpSound.volume = 0.3; // Ajusta el volumen según lo que quieras
+            noPowerUpSound.play().catch(() => {
+                console.log("El navegador bloqueó el autoplay. Necesita interacción.");
+            });
+
             return;
         }
 
         totalPoints -= cost;
         upgrades[type] = nextLevel;
         document.querySelector('.points').textContent = totalPoints;
+
+        const powerUpSound = new Audio('./music/powerUps.mp3');
+    	powerUpSound.volume = 0.5; // Ajusta el volumen según lo que quieras
+    	powerUpSound.play().catch(() => {
+    	    console.log("El navegador bloqueó el autoplay. Necesita interacción.");
+    	});
 
         if (type === 'damage') {
             if (currentLi.classList.contains('damage-l')) {
