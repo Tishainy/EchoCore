@@ -349,11 +349,11 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
         const cost = powerupCosts[type][nextLevel - 1];
         if (totalPoints < cost) {
             console.log(`Not enough points for ${type} level ${nextLevel}! Need ${cost}, have ${totalPoints}`);
-            // Apply red flash and shake effect to the <li> element
-            currentLi.classList.add('insufficient', 'shaking');
+            // Apply red flash, shake, and show text
+            currentLi.classList.add('insufficient', 'shaking', 'show-text');
             setTimeout(() => {
-                currentLi.classList.remove('insufficient', 'shaking');
-            }, 300); // Remove after 0.3 seconds (matches shake duration)
+                currentLi.classList.remove('insufficient', 'shaking', 'show-text');
+            }, 300); // Back to 300ms to match shake duration and keep it snappy
             return;
         }
 

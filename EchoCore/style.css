@@ -196,15 +196,16 @@ canvas {
   border-radius: 15px;
   padding: 20px;
   text-align: center;
-  transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+  transition: transform 0.3s ease-in-out, background 0.5s ease-in-out; /* Slower background transition */
   display: flex;
-  flex-direction: column; /* Alinea todos los elementos verticalmente -- Aligns all elements vertically */
-  align-items: center;    /* Centra el contenido -- Centers the content */
-  justify-content: space-between; /* Distribuye los elementos de manera uniforme -- Evenly distributes the elements */
-  height: 180px; /* Altura fija para asegurar consistencia -- Fixed height for consistency */
-  width: 150px;  /* Ancho fijo -- Fixed width */
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 180px;
+  width: 150px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
   overflow: hidden;
+  position: relative; /* For positioning the ::after text */
 }
 
 .menu_powerUps li img {
@@ -254,10 +255,27 @@ canvas {
   font-size: 2.5rem;
 }
 
-/* Insufficient points effect */
-.insufficient {
-  background: linear-gradient(to bottom, rgba(255, 0, 0, 0.7), rgba(200, 0, 0, 0.7)); /* Red tint */
-  transition: background 0.2s ease; /* Smooth transition for color */
+/* Insufficient points effect - Higher specificity and slower transition */
+.menu_powerUps li.insufficient {
+  background: linear-gradient(to bottom, rgba(255, 0, 0, 0.7), rgba(200, 0, 0, 0.7)) !important;
+  transition: background 0.5s ease-in-out; /* Slower ease in/out for red tint */
+}
+
+.menu_powerUps li.insufficient::after {
+  content: "Insufficient Funds";
+  position: absolute;
+  bottom: -30px; /* Position below the box */
+  left: 50%;
+  transform: translateX(-50%);
+  color: red;
+  font-size: 0.9rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.menu_powerUps li.insufficient.show-text::after {
+  opacity: 1; /* Show text when .show-text is added */
 }
 
 /* Shake animation */
@@ -269,6 +287,6 @@ canvas {
   100% { transform: translateX(0); }
 }
 
-.shaking {
+.menu_powerUps li.shaking {
   animation: shake 0.3s ease; /* Shake for 0.3 seconds */
 }
