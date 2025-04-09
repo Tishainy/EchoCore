@@ -45,9 +45,14 @@ export class BossBullet extends EnemyBullet {
     constructor(x, y, angle) {
         super(x, y, angle);
         this.bounces = 0;
-        this.maxBounces = 1;
+        this.maxBounces = 3; // Still allows multiple bounces
         this.creationTime = Date.now();
-        this.lifetime = 7000;
+        this.lifetime = 7000; // Full lifetime as fallback
+        this.fadeStartTime = null; // Time when fade *starts* (after delay)
+        this.firstBounceTime = null; // Time of first bounce
+        this.delayBeforeFade = 2000; // 1.8 seconds delay before fading starts
+        this.fadeDuration = 50; // 0.05 seconds to fade out
+        this.opacity = 1; // Start fully opaque
     }
 
     update() {
@@ -56,27 +61,69 @@ export class BossBullet extends EnemyBullet {
         this.x += vx;
         this.y += vy;
 
+        // Bounce logic: Reflect off canvas edges if bounces < maxBounces
         if (this.bounces < this.maxBounces) {
-            if (this.x <= 0 || this.x + this.width >= 500) {
+            let bounced = false;
+
+            // Horizontal bounce (left or right edge)
+            if (this.x <= 0) {
+                this.x = 0;
                 this.angle = Math.PI - this.angle;
                 this.bounces++;
-            }
-            if (this.y <= 0 || this.y + this.height >= 500) {
-                this.angle = -this.angle;
+                if (this.bounces === 1) this.firstBounceTime = Date.now(); // Record first bounce time
+                bounced = true;
+            } else if (this.x + this.width >= 500) {
+                this.x = 500 - this.width;
+                this.angle = Math.PI - this.angle;
                 this.bounces++;
+                if (this.bounces === 1) this.firstBounceTime = Date.now(); // Record first bounce time
+                bounced = true;
+            }
+
+            // Vertical bounce (top or bottom edge)
+            if (this.y <= 0) {
+                this.y = 0;
+                this.angle = -this.angle;
+                if (!bounced) {
+                    this.bounces++;
+                    if (this.bounces === 1) this.firstBounceTime = Date.now(); // Record first bounce time
+                }
+            } else if (this.y + this.height >= 500) {
+                this.y = 500 - this.height;
+                this.angle = -this.angle;
+                if (!bounced) {
+                    this.bounces++;
+                    if (this.bounces === 1) this.firstBounceTime = Date.now(); // Record first bounce time
+                }
             }
         }
 
+        // Fade logic: Start fading after 1.8 seconds from first bounce
+        if (this.firstBounceTime && !this.fadeStartTime) {
+            const timeSinceFirstBounce = Date.now() - this.firstBounceTime;
+            if (timeSinceFirstBounce >= this.delayBeforeFade) {
+                this.fadeStartTime = Date.now(); // Start fading after 5 seconds
+            }
+        }
+
+        if (this.fadeStartTime) {
+            const timeSinceFade = Date.now() - this.fadeStartTime;
+            this.opacity = Math.max(0, 1 - timeSinceFade / this.fadeDuration); // Fade from 1 to 0 over 0.5s
+        }
+
+        // Normalize angle to stay within 0 to 2π
         if (this.angle < 0) this.angle += 2 * Math.PI;
         if (this.angle >= 2 * Math.PI) this.angle -= 2 * Math.PI;
     }
 
     draw(ctx) {
-        ctx.fillStyle = "purple";
+        ctx.save();
+        ctx.fillStyle = `rgba(128, 0, 128, ${this.opacity})`; // Purple with opacity
         ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.restore();
     }
 
     hasExpired() {
-        return Date.now() - this.creationTime > this.lifetime;
+        return Date.now() - this.creationTime > this.lifetime || this.opacity <= 0; // Expire if lifetime exceeded or fully faded
     }
 }

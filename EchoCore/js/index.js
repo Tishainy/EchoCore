@@ -233,15 +233,13 @@ function runGame() {
         bullet.update();
         bullet.draw(ctx);
 
+        // Only remove BossBullets based on lifetime or full fade-out, not position
         if (bullet instanceof BossBullet) {
-            if (
-                (bullet.bounces >= bullet.maxBounces &&
-                 (bullet.y > canvas.height || bullet.y < 0 || bullet.x < 0 || bullet.x > canvas.width)) ||
-                bullet.hasExpired()
-            ) {
+            if (bullet.hasExpired()) {
                 enemyBullets.splice(index, 1);
             }
         } else {
+            // Regular EnemyBullets still remove when out of bounds
             if (
                 bullet.y > canvas.height ||
                 bullet.y < 0 ||
@@ -252,6 +250,7 @@ function runGame() {
             }
         }
 
+        // Player collision check
         if (
             bullet.x < player.x + player.width &&
             bullet.x + bullet.width > player.x &&
@@ -349,11 +348,10 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
         const cost = powerupCosts[type][nextLevel - 1];
         if (totalPoints < cost) {
             console.log(`Not enough points for ${type} level ${nextLevel}! Need ${cost}, have ${totalPoints}`);
-            // Apply red flash, shake, and show text
-            currentLi.classList.add('insufficient', 'shaking', 'show-text');
+            currentLi.classList.add('insufficient', 'shaking');
             setTimeout(() => {
-                currentLi.classList.remove('insufficient', 'shaking', 'show-text');
-            }, 300); // Back to 300ms to match shake duration and keep it snappy
+                currentLi.classList.remove('insufficient', 'shaking');
+            }, 300);
             return;
         }
 

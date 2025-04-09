@@ -173,29 +173,46 @@ export class Boss {
     }
 
     shootPatterns(enemyBullets) {
-        const centerX = this.x + this.width / 2; // Center of the boss // Centro del jefe
+        const centerX = this.x + this.width / 2; // Center of the boss
         const centerY = this.y + this.height / 2;
 
         if (this.patternPhase === 0) {
-            const bulletCount = 12; // Pattern 0: Shoot in a circular spread // Patrón 0: Disparar en una dispersión circular
+            // Pattern 0: Spiral Wave
+            const bulletCount = 7;
+            const spiralSpeed = 0.1; // Rotation speed of the spiral
             for (let i = 0; i < bulletCount; i++) {
-                const angle = (i / bulletCount) * 2 * Math.PI; // Calculate the angle for each bullet // Calcular el ángulo para cada bala
-                const bullet = new BossBullet(centerX, centerY, angle); // Create a bullet with BossBullet // Crear una bala con BossBullet
-                enemyBullets.push(bullet); // Add bullet to enemy bullets array // Agregar la bala al array de balas del enemigo
+                const angle = (i / bulletCount) * 2 * Math.PI + this.rotation * spiralSpeed;
+                const bullet = new BossBullet(centerX, centerY, angle);
+                bullet.speed = 2; // Slightly slower for dodgeability
+                enemyBullets.push(bullet);
             }
         } else if (this.patternPhase === 1) {
-            const bulletCount = 5; // Pattern 1: Shoot in a spread with fewer bullets // Patrón 1: Disparar en una dispersión con menos balas
-            for (let i = 0; i < bulletCount; i++) {
-                const angle = Math.PI + (i - bulletCount / 2) * 0.3; // Calculate the angle for each bullet // Calcular el ángulo para cada bala
-                const bullet = new BossBullet(centerX, centerY, angle); // Create a bullet with BossBullet // Crear una bala con BossBullet
-                enemyBullets.push(bullet); // Add bullet to enemy bullets array // Agregar la bala al array de balas del enemigo
+            // Pattern 1: Double Arc Burst
+            const arcCount = 2;
+            const bulletCountPerArc = 4;
+            const arcSpread = 0.5; // Spread of each arc
+            for (let arc = 0; arc < arcCount; arc++) {
+                const baseAngle = Math.PI * (arc === 0 ? 0.75 : 1.25); // Two arcs at slight angles downward
+                for (let i = 0; i < bulletCountPerArc; i++) {
+                    const angle = baseAngle + (i - bulletCountPerArc / 2) * arcSpread / bulletCountPerArc;
+                    const bullet = new BossBullet(centerX, centerY, angle);
+                    bullet.speed = 2.5; // Moderate speed
+                    enemyBullets.push(bullet);
+                }
             }
         } else if (this.patternPhase === 2) {
-            const bulletCount = 8; // Pattern 2: Shoot a circular spread with more bullets // Patrón 2: Disparar una dispersión circular con más balas
-            for (let i = 0; i < bulletCount; i++) {
-                const angle = this.rotation + (i / bulletCount) * 2 * Math.PI; // Calculate the angle for each bullet // Calcular el ángulo para cada bala
-                const bullet = new BossBullet(centerX, centerY, angle); // Create a bullet with BossBullet // Crear una bala con BossBullet
-                enemyBullets.push(bullet); // Add bullet to enemy bullets array // Agregar la bala al array de balas del enemigo
+            // Pattern 2: Flower Petal Pattern
+            const petalCount = 4;
+            const bulletCountPerPetal = 3;
+            const petalSpread = 0.2;
+            for (let petal = 0; petal < petalCount; petal++) {
+                const baseAngle = (petal / petalCount) * 2 * Math.PI;
+                for (let i = 0; i < bulletCountPerPetal; i++) {
+                    const angle = baseAngle + (i - bulletCountPerPetal / 2) * petalSpread;
+                    const bullet = new BossBullet(centerX, centerY, angle);
+                    bullet.speed = 2; // Slower speed for a "petal" effect
+                    enemyBullets.push(bullet);
+                }
             }
         }
     }
