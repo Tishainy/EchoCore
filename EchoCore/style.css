@@ -150,10 +150,24 @@ canvas {
   animation: blink 1.5s infinite;
   transition: background-color 0.3s;
 }
-
 #startButton:hover {
   background-color: #555;
 }
+#restartButton {
+  padding: 20px 40px;
+  font-size: 2rem;
+  background-color: #7f7f7f;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  animation: blink 1.5s infinite;
+  transition: background-color 0.3s;
+}
+#restarButton:hover {
+  background-color: #555;
+}
+
 
 @keyframes blink {
   0%,

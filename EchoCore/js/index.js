@@ -71,7 +71,6 @@ document.addEventListener('keydown', function(event) {
         startGame();
     }
 });
-
 document.getElementById('startButton').addEventListener('click', function() {
     if (!gameRunning) {
         document.getElementById('menu').style.display = 'none';
@@ -79,6 +78,41 @@ document.getElementById('startButton').addEventListener('click', function() {
         startGame();
     }
 });
+document.getElementById('restartButton').addEventListener('click', function() {
+    // Reinicia el estado del juego
+    gameRunning = false;
+    gameOver = false;
+    score = 0;
+    totalPoints = 0;
+    upgrades = { damage: 0, speed: 0, columns: 0 };
+
+    // Limpia el canvas del juego, pero no el canvas del inicio
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Oculta el menú y muestra la pantalla de inicio
+    document.getElementById('menu').style.display = 'none';
+    document.getElementById('game').style.display = 'block';
+
+    // Reinicia el texto de puntos
+    document.querySelector('.points').textContent = totalPoints;
+
+    // Restablece los Power-Ups en el DOM
+    document.querySelectorAll('.list-damage li, .list-speed li, .list-columns li').forEach((li) => {
+        li.style.display = 'none'; // Oculta todos los niveles
+    });
+    document.querySelector('.damage-l').style.display = 'block'; // Muestra el nivel inicial
+    document.querySelector('.speed-l').style.display = 'block'; // Muestra el nivel inicial
+    document.querySelector('.columns-l').style.display = 'block'; // Muestra el nivel inicial
+
+    // Detén cualquier animación en curso
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+    }
+    startGame()
+    console.log("Game reset. Ready to start again.");
+});
+
 
 function startGame() {
     if (animationFrameId) {
@@ -100,7 +134,7 @@ function startGame() {
         clearInterval(enemyInterval);
     }
     enemyInterval = setInterval(() => {
-        if (!gameOver && !boss && score < 1000 && enemies.length < 5) { // Cap at 5 enemies
+        if (!gameOver && !boss && score < 1000 && enemies.length < 5) {
             enemies.push(new Enemy());
         }
     }, 1500);
