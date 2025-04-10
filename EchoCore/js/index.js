@@ -342,38 +342,10 @@ function drawRotatingSquare() {
 }
 
 
-let lastTimestamp = 0;
-let accumulator = 0;
-const fixedTimeStep = 1000 / 60; // 60 FPS
-
-function animate(timestamp) {
-  const deltaTime = timestamp - lastTimestamp;
-  lastTimestamp = timestamp;
-  accumulator += deltaTime;
-
-  while (accumulator >= fixedTimeStep) {
-    update(fixedTimeStep);
-    accumulator -= fixedTimeStep;
-  }
-
-  draw();
-  requestAnimationFrame(animate);
+function animate() {
+    drawRotatingSquare();
+    requestAnimationFrame(animate);
 }
-
-function update(deltaTime) {
-  // Update game state here
-}
-
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawRotatingSquare();
-}
-
-// start the animation loop
-requestAnimationFrame(animate);
-
-// start the animation loop
-requestAnimationFrame(animate);
 
 animate();
 blinkStartTime = Date.now();
