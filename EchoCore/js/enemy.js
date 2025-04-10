@@ -19,10 +19,8 @@ export class Enemy {
     }
 
     update(player, enemyBullets, canvas, isSlowMotion) {
-        
         this.speed = this.baseSpeed; // Velocidad normal
-        
-
+    
         if (this.exploding) {
             this.explosionSize += 3;
             this.opacity -= 0.01;
@@ -38,22 +36,19 @@ export class Enemy {
         
             return this.opacity <= 0;
         }
-
+    
         this.y += this.speed; // Mover al enemigo hacia abajo
         this.rotation += 0.05; // Rotar al enemigo para animación
-        if (this.y > canvas.height && !this.hasPlayedDeathSound) {
-            this.playDeathSound();  // Reproducir el sonido de muerte
-            this.hasPlayedDeathSound = false; // Marcar que el sonido ya ha sido reproducido
-        }
+        
         if (this.rotation >= 2 * Math.PI) this.rotation = 0; // Reiniciar la rotación después de un círculo completo
-
+    
         if (this.shootCooldown <= 0) {
             this.shoot(player, enemyBullets); // Disparar si el tiempo de recarga ha terminado
             this.shootCooldown = 1000; // Restablecer el tiempo de recarga
         } else {
             this.shootCooldown -= 10; // Reducir el tiempo de recarga con el tiempo
         }
-
+    
         return this.y > canvas.height; // Retornar verdadero si el enemigo está fuera de la pantalla
     }
 
