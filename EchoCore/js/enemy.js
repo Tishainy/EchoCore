@@ -19,11 +19,9 @@ export class Enemy {
     }
 
     update(player, enemyBullets, canvas, isSlowMotion) {
-        if (isSlowMotion) {
-            this.speed = this.baseSpeed * 0.5; // Reducir la velocidad a la mitad durante la cámara lenta
-        } else {
-            this.speed = this.baseSpeed; // Velocidad normal
-        }
+        
+        this.speed = this.baseSpeed; // Velocidad normal
+        
 
         if (this.exploding) {
             this.explosionSize += 3;
