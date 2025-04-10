@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0%;
   padding: 0%;
-  font-family: "Jersey 20", sans-serif; /* Mantiene la fuente Jersey 20 */
+  font-family: "Jersey 20", sans-serif; /* Mantiene la fuente Jersey 20 / Keeps the Jersey 20 font */
   font-size: 16px;
 }
 
@@ -12,21 +12,21 @@ body {
   height: 100%;
   margin: 0;
   background-attachment: fixed;
-  color: white; /* Texto blanco en todo el sitio */
+  color: white; /* Texto blanco en todo el sitio / White text throughout the site */
 }
 
-/* Estilo para el video de fondo */
+/* Estilo para el video de fondo / Style for the background video */
 #background-video {
-  position: fixed; /* Fija el video en el fondo */
+  position: fixed; /* Fija el video en el fondo / Fixes the video in the background */
   top: 0;
   left: 0;
-  width: 100%; /* Asegura que el video cubra toda la pantalla */
-  height: 100%; /* Asegura que el video cubra toda la pantalla */
-  object-fit: cover; /* Hace que el video cubra todo el fondo sin distorsionarse */
-  z-index: -1; /* Asegura que el video esté detrás de otros contenidos */
+  width: 100%; /* Asegura que el video cubra toda la pantalla / Ensures the video covers the entire screen */
+  height: 100%; /* Asegura que el video cubra toda la pantalla / Ensures the video covers the entire screen */
+  object-fit: cover; /* Hace que el video cubra todo el fondo sin distorsionarse / Makes the video cover the entire background without distortion */
+  z-index: -1; /* Asegura que el video esté detrás de otros contenidos / Ensures the video is behind other content */
 }
 
-/* Estilo para la sección #inicio */
+/* Estilo para la sección #inicio / Style for the #inicio section */
 .inicio {
   display: flex;
   justify-content: center;
@@ -34,11 +34,11 @@ body {
   height: 100vh;
 }
 
-/* Contenedor principal */
+/* Contenedor principal / Main container */
 .inicioContainer {
   width: 800px;
   height: 90%;
-  background-color: rgba(50, 50, 50, 0.7); /* Fondo gris oscuro */
+  background-color: rgba(50, 50, 50, 0.7); /* Fondo gris oscuro / Dark gray background */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -46,10 +46,10 @@ body {
   text-align: center;
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6); /* Sombra oscura */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6); /* Sombra oscura / Dark shadow */
 }
 
-/* Header: Título ECHOCORE */
+/* Header: Título ECHOCORE / Header: ECHOCORE title */
 .inicioHeader {
   width: 100%;
   margin-bottom: 10px;
@@ -57,12 +57,12 @@ body {
 
 .inicioHeader h1 {
   font-size: 3rem;
-  color: white; /* Título en blanco */
+  color: white; /* Título en blanco / White title */
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
   margin-top: 90px;
 }
 
-/* Contenedor del canvas */
+/* Contenedor del canvas / Canvas container */
 .inicioCanvas {
   display: flex;
   justify-content: center;
@@ -70,7 +70,7 @@ body {
   flex-grow: 1;
 }
 
-/* Texto "PRESS ENTER TO START" */
+/* Texto "PRESS ENTER TO START" / "PRESS ENTER TO START" text */
 .inicioFooter {
   width: 100%;
   margin-bottom: 70px;
@@ -79,13 +79,13 @@ body {
 }
 
 .inicioFooter p {
-  color: white; /* Texto blanco */
+  color: white; /* Texto blanco / White text */
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
   font-size: 1.2rem;
   animation: blink 1.5s infinite ease-in-out;
 }
 
-/* Animación de parpadeo */
+/* Animación de parpadeo / Blinking animation */
 @keyframes blink {
   0% {
     opacity: 1;
@@ -106,10 +106,10 @@ canvas {
   left: 50%;
   box-shadow: 3px 5px 7px rgba(255, 255, 255, 0.2);
   transform: translate(-50%, -50%);
-  border: 3px solid rgba(255, 255, 255, 0.5); /* Borde sutil blanco */
+  border: 3px solid rgba(255, 255, 255, 0.5); /* Borde sutil blanco / Subtle white border */
 }
 
-/* Contenedor del menú */
+/* Contenedor del menú / Menu container */
 .menuContainer {
   display: flex;
   flex-direction: column;
@@ -118,7 +118,7 @@ canvas {
   text-align: center;
   padding: 20px;
   gap: 20px;
-  background-color: rgba(0, 0, 0, 0.8); /* Fondo negro semi-translúcido */
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo negro semi-translúcido / Semi-translucent black background */
   width: 800px;
   height: 90%;
   border-radius: 10px;
@@ -130,14 +130,14 @@ canvas {
   position: relative;
 }
 
-/* Título del menú */
+/* Título del menú / Menu title */
 .menuHeader h1 {
   font-size: 3rem;
-  color: white; /* Título en blanco */
+  color: white; /* Título en blanco / White title */
   margin-bottom: 10px;
 }
 
-/* Sección de Menú */
+/* Sección de Menú / Menu section */
 .menu {
   display: flex;
   justify-content: center;
@@ -145,7 +145,7 @@ canvas {
   height: 100vh;
 }
 
-/* Estilos para el botón de inicio */
+/* Estilos para el botón de inicio / Styles for the start button */
 .buttomStar {
   display: flex;
   flex-direction: column;
@@ -156,8 +156,8 @@ canvas {
 #startButton {
   padding: 20px 40px;
   font-size: 2rem;
-  background-color: #555; /* Gris oscuro */
-  color: white; /* Texto blanco */
+  background-color: #555; /* Gris oscuro / Dark gray */
+  color: white; /* Texto blanco / White text */
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -166,14 +166,14 @@ canvas {
 }
 
 #startButton:hover {
-  background-color: #333; /* Gris más oscuro */
+  background-color: #333; /* Gris más oscuro / Darker gray */
 }
 
 #restartButton {
   padding: 20px 40px;
   font-size: 2rem;
-  background-color: #555; /* Gris oscuro */
-  color: white; /* Texto blanco */
+  background-color: #555; /* Gris oscuro / Dark gray */
+  color: white; /* Texto blanco / White text */
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -182,10 +182,10 @@ canvas {
 }
 
 #restartButton:hover {
-  background-color: #333; /* Gris más oscuro */
+  background-color: #333; /* Gris más oscuro / Darker gray */
 }
 
-/* Animación de parpadeo */
+/* Animación de parpadeo / Blinking animation */
 @keyframes blink {
   0%,
   100% {
@@ -198,11 +198,11 @@ canvas {
 
 .buttomStar h3 {
   margin-top: 30px;
-  color: white; /* Texto blanco */
+  color: white; /* Texto blanco / White text */
   font-size: 1.5rem;
 }
 
-/* Contenedor de los Power-Ups */
+/* Contenedor de los Power-Ups / Power-Ups container */
 .menu_powerUps {
   display: flex;
   justify-content: space-between;
@@ -223,7 +223,7 @@ canvas {
 }
 
 .menu_powerUps li {
-  background: linear-gradient(to bottom, #333, #555); /* Fondo gris oscuro */
+  background: linear-gradient(to bottom, #333, #555); /* Fondo gris oscuro / Dark gray background */
   border-radius: 15px;
   padding: 20px;
   text-align: center;
@@ -250,13 +250,13 @@ canvas {
 
 .menu_powerUps li:hover {
   transform: translateY(-5px);
-  background-color: #444; /* Gris más claro */
+  background-color: #444; /* Gris más claro / Lighter gray */
 }
 
 .menu_powerUps button {
   padding: 8px 14px;
-  background-color: #333; /* Fondo oscuro */
-  color: white; /* Texto blanco */
+  background-color: #333; /* Fondo oscuro / Dark background */
+  color: white; /* Texto blanco / White text */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -264,28 +264,28 @@ canvas {
 }
 
 .menu_powerUps button:hover {
-  background-color: #444; /* Gris más claro al pasar el cursor */
+  background-color: #444; /* Gris más claro al pasar el cursor / Lighter gray on hover */
 }
 
-/* Estilo para los puntos */
+/* Estilo para los puntos / Style for the points */
 .menuContainer p {
   margin-top: 20px;
-  color: white; /* Texto blanco */
+  color: white; /* Texto blanco / White text */
   margin-bottom: 15px;
   text-align: center;
 }
 
 .points {
-  color: white; /* Texto blanco */
+  color: white; /* Texto blanco / White text */
   font-size: 2.5rem;
 }
 
 .word {
-  color: white; /* Texto blanco */
+  color: white; /* Texto blanco / White text */
   font-size: 2.5rem;
 }
 
-/* Insufficient points effect */
+/* Efecto de puntos insuficientes / Insufficient points effect */
 .menu_powerUps li.insufficient {
   background: linear-gradient(to bottom, rgba(255, 0, 0, 0.7), rgba(200, 0, 0, 0.7)) !important;
 }
@@ -296,7 +296,7 @@ canvas {
   bottom: -30px;
   left: 50%;
   transform: translateX(-50%);
-  color: red; /* Texto rojo */
+  color: red; /* Texto rojo / Red text */
   font-size: 0.9rem;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   opacity: 0;
@@ -307,7 +307,7 @@ canvas {
   opacity: 1;
 }
 
-/* Shake animation */
+/* Animación de sacudida / Shake animation */
 @keyframes shake {
   0% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
