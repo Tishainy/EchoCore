@@ -341,10 +341,22 @@ function drawRotatingSquare() {
     angle += 0.01;
 }
 
-function animate() {
-    drawRotatingSquare();
-    requestAnimationFrame(animate);
+
+let lastTimestamp = 0;
+function animate(timestamp) {
+  const deltaTime = timestamp - lastTimestamp;
+  lastTimestamp = timestamp;
+  if (deltaTime > 0) {
+    const fps = 1000 / deltaTime;
+    console.log(`FPS: ${fps.toFixed(2)}`);
+  }
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawRotatingSquare();
+  requestAnimationFrame(animate);
 }
+
+// start the animation loop
+requestAnimationFrame(animate);
 
 animate();
 blinkStartTime = Date.now();
