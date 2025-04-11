@@ -27,7 +27,7 @@ body {
 }
 
 /* Estilo para la sección #inicio / Style for the #inicio section */
-.inicio {
+.start {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +35,7 @@ body {
 }
 
 /* Contenedor principal / Main container */
-.inicioContainer {
+.startContainer {
   width: 800px;
   height: 90%;
   background-color: rgba(50, 50, 50, 0.7); /* Fondo gris oscuro / Dark gray background */
@@ -50,12 +50,12 @@ body {
 }
 
 /* Header: Título ECHOCORE / Header: ECHOCORE title */
-.inicioHeader {
+.startHeader {
   width: 100%;
   margin-bottom: 10px;
 }
 
-.inicioHeader h1 {
+.startHeader h1 {
   font-size: 3rem;
   color: white; /* Título en blanco / White title */
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
@@ -63,7 +63,7 @@ body {
 }
 
 /* Contenedor del canvas / Canvas container */
-.inicioCanvas {
+.startCanvas {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,14 +71,14 @@ body {
 }
 
 /* Texto "PRESS ENTER TO START" / "PRESS ENTER TO START" text */
-.inicioFooter {
+.startFooter {
   width: 100%;
   margin-bottom: 70px;
   display: flex;
   justify-content: center;
 }
 
-.inicioFooter p {
+.startFooter p {
   color: white; /* Texto blanco / White text */
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
   font-size: 1.2rem;

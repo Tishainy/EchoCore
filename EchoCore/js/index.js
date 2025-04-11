@@ -9,10 +9,10 @@ const ctx = canvas.getContext("2d");
 canvas.width = 500;
 canvas.height = 500;
 
-const inicioCanvas = document.getElementById("inicioCanvas");
-const inicioCtx = inicioCanvas.getContext("2d");
-inicioCanvas.width = 500;
-inicioCanvas.height = 500;
+const startCanvas = document.getElementById("startCanvas");
+const startCtv = startCanvas.getContext("2d");
+startCanvas.width = 500;
+startCanvas.height = 500;
 
 let totalPoints = 0;
 
@@ -53,6 +53,7 @@ let animationFrameId = null;
 let shakeDuration = 0;
 const shakeIntensity = 3;
 
+// Verificar colisión entre el jugador y el enemigo // Check collision between the player and the enemy
 function checkPlayerEnemyCollision(player, enemy) {
     return (
         player.x < enemy.x + enemy.width &&
@@ -66,14 +67,14 @@ let enemyInterval;
 
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter' && !gameOver && !gameRunning) {
-        document.getElementById('inicio').style.display = 'none';
+        document.getElementById('start').style.display = 'none';
         document.getElementById('game').style.display = 'block';
 
-        // Música de fondo
+        // Música de fondo // Background music
         const music = document.getElementById("bg-music");
         music.volume = 0.5;
         music.play().catch(() => {
-            console.log("El navegador bloqueó el autoplay. Necesita interacción.");
+            console.log("El navegador bloqueó el autoplay. Necesita interacción."); // The browser blocked autoplay. Interaction is required.
         });
 
         startGame();
@@ -87,42 +88,43 @@ document.getElementById('startButton').addEventListener('click', function() {
         startGame();
     }
 });
+
 document.getElementById('restartButton').addEventListener('click', function() {
-    // Reinicia el estado del juego
+    // Reinicia el estado del juego // Reset the game state
     gameRunning = false;
     gameOver = false;
     score = 0;
     totalPoints = 0;
     upgrades = { damage: 0, speed: 0, columns: 0 };
 
-    // Limpia el canvas del juego, pero no el canvas del inicio
+    // Limpia el canvas del juego, pero no el canvas del inicio // Clear the game canvas, but not the start canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Oculta el menú y muestra la pantalla de inicio
+    // Oculta el menú y muestra la pantalla de inicio // Hide the menu and show the start screen
     document.getElementById('menu').style.display = 'none';
     document.getElementById('game').style.display = 'block';
 
-    // Reinicia el texto de puntos
+    // Reinicia el texto de puntos // Reset the points text
     document.querySelector('.points').textContent = totalPoints;
 
-    // Restablece los Power-Ups en el DOM
+    // Restablece los Power-Ups en el DOM // Reset the Power-Ups in the DOM
     document.querySelectorAll('.list-damage li, .list-speed li, .list-columns li').forEach((li) => {
-        li.style.display = 'none'; // Oculta todos los niveles
+        li.style.display = 'none'; // Oculta todos los niveles // Hide all levels
     });
-    document.querySelector('.damage-l').style.display = 'block'; // Muestra el nivel inicial
-    document.querySelector('.speed-l').style.display = 'block'; // Muestra el nivel inicial
-    document.querySelector('.columns-l').style.display = 'block'; // Muestra el nivel inicial
+    document.querySelector('.damage-l').style.display = 'block'; // Muestra el nivel inicial // Show the initial level
+    document.querySelector('.speed-l').style.display = 'block'; // Muestra el nivel inicial // Show the initial level
+    document.querySelector('.columns-l').style.display = 'block'; // Muestra el nivel inicial // Show the initial level
 
-    // Detén cualquier animación en curso
+    // Detén cualquier animación en curso // Stop any ongoing animation
     if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
         animationFrameId = null;
     }
-    startGame()
+    startGame();
     console.log("Game reset. Ready to start again.");
 });
 
-
+// Inicia el juego // Start the game
 function startGame() {
     if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
@@ -151,6 +153,7 @@ function startGame() {
     runGame();
 }
 
+// Dibuja un consejo en el canvas // Draw a tip on the canvas
 function drawTip(ctx, canvas) {
     if (showTip) {
         let opacity = isBlinking ? 1 : 0;
@@ -164,12 +167,13 @@ function drawTip(ctx, canvas) {
     }
 }
 
+// Ejecuta el juego // Run the game
 function runGame() {
     if (gameOver) {
         clearInterval(enemyInterval);
         totalPoints += score;
         document.querySelector('.points').textContent = totalPoints;
-        
+
         setTimeout(() => {
             document.getElementById('game').style.display = 'none';
             document.getElementById('menu').style.display = 'block';
@@ -256,7 +260,7 @@ function runGame() {
             if (boss && boss.checkCollision(bullet)) {
                 boss.health -= bullet.damage;
                 if (!boss.exploding) {
-                    score += 50; // Only award points if not exploding
+                    score += 50; // Solo otorga puntos si no está explotando // Only award points if not exploding
                 }
                 bullets.splice(bulletIndex, 1);
                 if (boss.health <= 0 && !boss.exploding) {
@@ -276,13 +280,13 @@ function runGame() {
         bullet.update();
         bullet.draw(ctx);
 
-        // Only remove BossBullets based on lifetime or full fade-out, not position
+        // Solo elimina BossBullets según el tiempo de vida o desvanecimiento completo, no la posición // Only remove BossBullets based on lifetime or full fade-out, not position
         if (bullet instanceof BossBullet) {
             if (bullet.hasExpired()) {
                 enemyBullets.splice(index, 1);
             }
         } else {
-            // Regular EnemyBullets still remove when out of bounds
+            // Las balas normales del enemigo aún se eliminan cuando están fuera de los límites // Regular EnemyBullets still remove when out of bounds
             if (
                 bullet.y > canvas.height ||
                 bullet.y < 0 ||
@@ -293,7 +297,7 @@ function runGame() {
             }
         }
 
-        // Player collision check
+        // Verificar colisión con el jugador // Check collision with the player
         if (
             bullet.x < player.x + player.width &&
             bullet.x + bullet.width > player.x &&
@@ -303,11 +307,11 @@ function runGame() {
             player.lives--;
             enemyBullets.splice(index, 1);
             shakeDuration = 10;
-            const hurtSound = new Audio('./music/hurt.mp3'); // Asegúrate de que el archivo esté en la ruta correcta
-            hurtSound.volume = 0.8; // Ajusta el volumen si es necesario
+            const hurtSound = new Audio('./music/hurt.mp3'); // Asegúrate de que el archivo esté en la ruta correcta // Make sure the file is in the correct path
+            hurtSound.volume = 0.8; // Ajusta el volumen si es necesario // Adjust the volume if necessary
             hurtSound.play().catch(() => {
-            console.log("El navegador bloqueó el autoplay. Necesita interacción.");
-        });
+                console.log("De browser heeft het automatisch afspelen geblokkeerd. Interactie is vereist."); // The browser blocked autoplay. Interaction is required.
+            });
         }
     });
 
@@ -315,7 +319,7 @@ function runGame() {
         ctx.drawImage(heartImage, 10 + i * 40, 10, 80, 30);
     }
     ctx.font = "20px Arial";
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "white";
     ctx.textAlign = "right";
     ctx.fillText("Score: " + score, canvas.width - 20, 30);
 
@@ -326,18 +330,18 @@ function runGame() {
 
 let angle = 0;
 function drawRotatingSquare() {
-    inicioCtx.clearRect(0, 0, inicioCanvas.width, inicioCanvas.height);
-    inicioCtx.save();
-    inicioCtx.translate(inicioCanvas.width / 2, inicioCanvas.height / 2);
-    inicioCtx.rotate(angle);
-    inicioCtx.shadowColor = "rgba(255, 255, 255, 0.2)";
-    inicioCtx.shadowBlur = 7;
-    inicioCtx.shadowOffsetX = 35;
-    inicioCtx.shadowOffsetY = 35;
-    inicioCtx.strokeStyle = "gray";
-    inicioCtx.lineWidth = 24;
-    inicioCtx.strokeRect(-75, -75, 150, 150);
-    inicioCtx.restore();
+    startCtv.clearRect(0, 0, startCanvas.width, startCanvas.height);
+    startCtv.save();
+    startCtv.translate(startCanvas.width / 2, startCanvas.height / 2);
+    startCtv.rotate(angle);
+    startCtv.shadowColor = "rgba(255, 255, 255, 0.2)";
+    startCtv.shadowBlur = 7;
+    startCtv.shadowOffsetX = 35;
+    startCtv.shadowOffsetY = 35;
+    startCtv.strokeStyle = "gray";
+    startCtv.lineWidth = 24;
+    startCtv.strokeRect(-75, -75, 150, 150);
+    startCtv.restore();
     angle += 0.01;
 }
 
