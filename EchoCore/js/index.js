@@ -145,7 +145,7 @@ function startGame() {
         clearInterval(enemyInterval);
     }
     enemyInterval = setInterval(() => {
-        if (!gameOver && !boss && score < 1000 && enemies.length < 5) {
+        if (!gameOver && !boss && score < 1500 && enemies.length < 5) {
             enemies.push(new Enemy());
         }
     }, 1500);
@@ -215,7 +215,7 @@ function runGame() {
         if (bullet.y < 0) bullets.splice(index, 1);
     });
 
-    if (score >= 1000 && !boss && !gameOver) {
+    if (score >= 1500 && !boss && !gameOver) {
         boss = new Boss();
         enemies = [];
         clearInterval(enemyInterval);
