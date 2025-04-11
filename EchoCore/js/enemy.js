@@ -29,7 +29,7 @@ export class Enemy {
                 const bossDeadSound = new Audio('./music/enemyDead.mp3');
                 bossDeadSound.volume = 0.9;
                 bossDeadSound.play().catch(() => {
-                    console.log("El navegador bloqueó el autoplay. Necesita interacción.");
+                    console.log("De browser heeft het automatisch afspelen geblokkeerd. Interactie is vereist.");
                 });
                 this.hasPlayedDeathSound = true;
             }
@@ -181,7 +181,7 @@ export class Boss {
             const bossHitSound = new Audio('./music/bossHit.mp3');
             bossHitSound.volume = 0.1; // Ajusta el volumen si es necesario
             bossHitSound.play().catch(() => {
-                console.log("El navegador bloqueó el autoplay. Necesita interacción.");
+                console.log("De browser heeft het automatisch afspelen geblokkeerd. Interactie is vereist.");
             });
         
             if (this.health <= 0 && !this.exploding) {
