@@ -167,6 +167,11 @@ export class Boss {
     }
 
     checkCollision(bullet) {
+
+        if (this.exploding) {
+            return false; // Return false immediately if enemy is exploding
+        }
+        
         const hit = (
             bullet.x < this.x + this.width && // Verificar si la bala está dentro de los límites del jefe
             bullet.x + bullet.width > this.x &&

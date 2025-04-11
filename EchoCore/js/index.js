@@ -74,7 +74,7 @@ document.addEventListener('keydown', function(event) {
         const music = document.getElementById("bg-music");
         music.volume = 0.5;
         music.play().catch(() => {
-            console.log("De browser heeft het automatisch afspelen geblokkeerd. Interactie is vereist."); // The browser blocked autoplay. Interaction is required.
+            console.log("El navegador bloqueó el autoplay. Necesita interacción."); // The browser blocked autoplay. Interaction is required.
         });
 
         startGame();
@@ -226,21 +226,23 @@ function runGame() {
         const shouldRemove = enemy.update(player, enemyBullets, canvas, keys['j']);
         enemy.draw(ctx);
         if (shouldRemove) enemies.splice(enemyIndex, 1);
-
-        bullets.forEach((bullet, bulletIndex) => {
-            if (enemy.checkCollision(bullet)) {
-                if (!enemy.exploding) {
-                    enemy.exploding = true;
-                    score += 100;
+    
+        if (!enemy.exploding) {
+            bullets.forEach((bullet, bulletIndex) => {
+                if (enemy.checkCollision(bullet)) {
+                    if (!enemy.exploding) {
+                        enemy.exploding = true;
+                        score += 100;
+                    }
+                    bullets.splice(bulletIndex, 1);
                 }
-                bullets.splice(bulletIndex, 1);
+            });
+    
+            if (!enemy.exploding && checkPlayerEnemyCollision(player, enemy)) {
+                player.lives--;
+                enemy.exploding = true;
+                shakeDuration = 10;
             }
-        });
-
-        if (!enemy.exploding && checkPlayerEnemyCollision(player, enemy)) {
-            player.lives--;
-            enemy.exploding = true;
-            shakeDuration = 10;
         }
     });
 
@@ -410,7 +412,7 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
             const noPowerUpSound = new Audio('./music/noPoints.mp3');
             noPowerUpSound.volume = 0.3; // Ajusta el volumen según lo que quieras
             noPowerUpSound.play().catch(() => {
-                console.log("De browser heeft het automatisch afspelen geblokkeerd. Interactie is vereist.");
+                console.log("El navegador bloqueó el autoplay. Necesita interacción.");
             });
 
             return;
@@ -423,7 +425,7 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
         const powerUpSound = new Audio('./music/powerUps.mp3');
     	powerUpSound.volume = 0.5; // Ajusta el volumen según lo que quieras
     	powerUpSound.play().catch(() => {
-    	    console.log("De browser heeft het automatisch afspelen geblokkeerd. Interactie is vereist.");
+    	    console.log("El navegador bloqueó el autoplay. Necesita interacción.");
     	});
 
         if (type === 'damage') {
