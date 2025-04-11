@@ -46,7 +46,7 @@ export class Enemy {
             this.shoot(player, enemyBullets); // Disparar si el tiempo de recarga ha terminado
             this.shootCooldown = 1000; // Restablecer el tiempo de recarga
         } else {
-            this.shootCooldown -= 10; // Reducir el tiempo de recarga con el tiempo
+            this.shootCooldown -= 15; // Reducir el tiempo de recarga con el tiempo
         }
     
         return this.y > canvas.height; // Retornar verdadero si el enemigo está fuera de la pantalla
@@ -87,15 +87,17 @@ export class Enemy {
     }
 
     shoot(player, enemyBullets) {
-        let angleToPlayer = Math.atan2(player.y - this.y, player.x - this.x); // Calculate angle to player // Calcular el ángulo hacia el jugador
-        let spread = 0.2; // Spread bullets around the angle // Esparcir las balas alrededor del ángulo
-        for (let i = -1; i <= 1; i++) {
+        let angleToPlayer = Math.atan2(player.y - this.y, player.x - this.x); // Calcular el ángulo hacia el jugador // Calculate angle to player
+        let spread = 0.4; // Aumentar la dispersión de las balas // Increase bullet spread
+        let bulletCount = 8; // Aumentar la cantidad de balas disparadas // Increase the number of bullets fired
+    
+        for (let i = -Math.floor(bulletCount / 2); i <= Math.floor(bulletCount / 2); i++) {
             const bullet = new EnemyBullet(
-                this.x + this.width / 2 - 2, // Position bullet near the center of the enemy // Posicionar la bala cerca del centro del enemigo
+                this.x + this.width / 2 - 2, // Posicionar la bala cerca del centro del enemigo // Position bullet near the center of the enemy
                 this.y + this.height,
-                angleToPlayer + i * spread // Apply spread to the bullet's angle // Aplicar dispersión al ángulo de la bala
+                angleToPlayer + i * spread // Aplicar dispersión al ángulo de la bala // Apply spread to the bullet's angle
             );
-            enemyBullets.push(bullet); // Add bullet to the array of enemy bullets // Agregar la bala al array de balas del enemigo
+            enemyBullets.push(bullet); // Agregar la bala al array de balas del enemigo // Add bullet to the array of enemy bullets
         }
     }
 }
@@ -106,8 +108,8 @@ export class Boss {
         this.y = 50;
         this.width = 50;
         this.height = 50;
-        this.health = 500; // Set boss's health // Establecer la salud del jefe
-        this.speed = 1; // Set boss's speed // Establecer la velocidad del jefe
+        this.health = 10000; // Set boss's health // Establecer la salud del jefe
+        this.speed = 2.5; // Set boss's speed // Establecer la velocidad del jefe
         this.rotation = 0;
         this.shootCooldown = 0;
         this.patternPhase = 0; // Phase of attack pattern // Fase del patrón de ataque
@@ -135,7 +137,7 @@ export class Boss {
             this.shootCooldown = 1000; // Reset cooldown // Restablecer el tiempo de recarga
             this.patternPhase = (this.patternPhase + 1) % 3; // Change pattern phase // Cambiar la fase del patrón
         } else {
-            this.shootCooldown -= 10; // Reduce cooldown over time // Reducir el tiempo de recarga con el tiempo
+            this.shootCooldown -= 45; // Reduce cooldown over time // Reducir el tiempo de recarga con el tiempo
         }
 
         return false; // Boss is not out of the screen // El jefe no está fuera de la pantalla
