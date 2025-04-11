@@ -159,10 +159,10 @@ function drawTip(ctx, canvas) {
         let opacity = isBlinking ? 1 : 0;
         ctx.save();
         ctx.font = "20px Arial";
-        ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+        ctx.fillStyle = `rgb(255, 255, 255, ${opacity})`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText("Press J for Focus Mode", canvas.width / 2, canvas.height - 30);
+        ctx.fillText("Press J for Focus Mode A/S/D/W for move.", canvas.width / 2, canvas.height - 30);
         ctx.restore();
     }
 }
