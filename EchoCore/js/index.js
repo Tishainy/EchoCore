@@ -232,7 +232,7 @@ function runGame() {
                 if (enemy.checkCollision(bullet)) {
                     if (!enemy.exploding) {
                         enemy.exploding = true;
-                        score += 100;
+                        score += 150;
                     }
                     bullets.splice(bulletIndex, 1);
                 }
