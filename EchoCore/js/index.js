@@ -74,7 +74,7 @@ document.addEventListener('keydown', function(event) {
         const music = document.getElementById("bg-music");
         music.volume = 0.5;
         music.play().catch(() => {
-            console.log("El navegador bloqueó el autoplay. Necesita interacción."); // The browser blocked autoplay. Interaction is required.
+            console.log("De browser heeft het automatisch afspelen geblokkeerd. Interactie is vereist."); // The browser blocked autoplay. Interaction is required.
         });
 
         startGame();
@@ -410,7 +410,7 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
             const noPowerUpSound = new Audio('./music/noPoints.mp3');
             noPowerUpSound.volume = 0.3; // Ajusta el volumen según lo que quieras
             noPowerUpSound.play().catch(() => {
-                console.log("El navegador bloqueó el autoplay. Necesita interacción.");
+                console.log("De browser heeft het automatisch afspelen geblokkeerd. Interactie is vereist.");
             });
 
             return;
@@ -423,7 +423,7 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
         const powerUpSound = new Audio('./music/powerUps.mp3');
     	powerUpSound.volume = 0.5; // Ajusta el volumen según lo que quieras
     	powerUpSound.play().catch(() => {
-    	    console.log("El navegador bloqueó el autoplay. Necesita interacción.");
+    	    console.log("De browser heeft het automatisch afspelen geblokkeerd. Interactie is vereist.");
     	});
 
         if (type === 'damage') {
