@@ -9,54 +9,53 @@ export class Player {
         this.width = 20;
         this.height = 20;
         this.lives = 3;
-        this.speed = 2; // Velocidad normal
+        this.speed = 2;
         this.rotation = 0;
-        this.isJPressed = false; // Estado para saber si la tecla "j" está presionada
+        this.isJPressed = false;
+        this.damageLevel = 1;
+        this.columns = 1;
     }
 
-    update(keys, shootCooldown, bullets, canvas) {
-        // Detectar si la tecla "j" está presionada o no
+    update(keys, shootCooldown, bullets, canvas, speedUpgrade = 0) {
         if (keys["j"]) {
             this.isJPressed = true;
-            this.speed = 1; // Reducir la velocidad a la mitad
-            this.width = 10; // Reducir el tamaño a la mitad
-            this.height = 10; // Reducir el tamaño a la mitad
+            this.speed = 2;
+            this.width = 10;
+            this.height = 10;
         } else {
             this.isJPressed = false;
-            this.speed = 2; // Restaurar la velocidad normal
-            this.width = 20; // Restaurar el tamaño normal
-            this.height = 20; // Restaurar el tamaño normal
+            this.speed = 4;
+            this.width = 20;
+            this.height = 20;
         }
 
-        // Movimiento del jugador con WASD o flechas
         if (keys["w"] || keys["ArrowUp"]) this.y -= this.speed;
         if (keys["s"] || keys["ArrowDown"]) this.y += this.speed;
         if (keys["a"] || keys["ArrowLeft"]) this.x -= this.speed;
         if (keys["d"] || keys["ArrowRight"]) this.x += this.speed;
 
-        // Limitar el movimiento del jugador dentro del canvas
         this.x = Math.max(0, Math.min(canvas.width - this.width, this.x));
         this.y = Math.max(0, Math.min(canvas.height - this.height, this.y));
 
-        // Rotación del jugador
         this.rotation += 0.05;
         if (this.rotation >= 2 * Math.PI) this.rotation = 0;
 
-        // Disparo
+        const baseCooldown = 200 - speedUpgrade * 50;
         if (shootCooldown <= 0) {
             this.shoot(bullets);
-            return 200; // Reset cooldown
+            return baseCooldown;
         }
-        return shootCooldown - 8; // Disminuir el cooldown
+
+        return shootCooldown - 8 - speedUpgrade * 2;
     }
 
     draw(ctx) {
         ctx.save();
         ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
         ctx.rotate(this.rotation);
-        ctx.strokeStyle = "black";
+        ctx.strokeStyle = "white";
         ctx.lineWidth = 3;
-        ctx.shadowColor = "rgba(0, 0, 0, 0.4)";
+        ctx.shadowColor = "rgba(255, 255, 255, 0.38";
         ctx.shadowOffsetX = 10;
         ctx.shadowOffsetY = 10;
         ctx.shadowBlur = 10;
@@ -65,7 +64,14 @@ export class Player {
     }
 
     shoot(bullets) {
-        const bullet = new Bullet(this.x + this.width / 2 - 2, this.y);
-        bullets.push(bullet);
+        const bulletSpacing = 10;
+        const totalWidth = (this.columns - 1) * bulletSpacing;
+        const startX = this.x + (this.width / 2) - (totalWidth / 2);
+
+        for (let i = 0; i < this.columns; i++) {
+            const bullet = new Bullet(startX + i * bulletSpacing, this.y);
+            bullet.damage = this.damageLevel * 10;
+            bullets.push(bullet);
+        }
     }
 }

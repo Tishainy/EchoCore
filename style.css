@@ -1,92 +1,111 @@
-
 * {
   box-sizing: border-box;
   margin: 0%;
   padding: 0%;
-  font-family: jersey, sans-serif;
+  font-family: "Jersey 20", sans-serif; /* Mantiene la fuente Jersey 20 / Keeps the Jersey 20 font */
   font-size: 16px;
 }
 
 body {
-  background: linear-gradient(white,rgba(0, 0, 0, 0.336));
-  background-repeat: no-repeat;
   height: 100%;
   margin: 0;
   background-attachment: fixed;
+  background: linear-gradient(to top, #000000, #2c2c2c);
+  overflow: hidden;
+  background: #000000;
+  color: white; /* Texto blanco en todo el sitio / White text throughout the site */
 }
 
-/* Estilo para la sección #inicio */
-.inicio {
-  display: flex;          /* Usamos flexbox */
-  justify-content: center; /* Centra el contenido horizontalmente */
-  align-items: center;    /* Centra el contenido verticalmente */
-  height: 100vh;          /* Hace que la sección ocupe toda la altura de la ventana */
+.star {
+  position: absolute;
+  width: 2.5px;
+  height: 2.5px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 3px 1px white;
+  animation: blink 2s infinite ease-in-out, fall 10s linear infinite;
 }
 
-/* Contenedor principal */
-.inicioContainer {
-  width: 800px;     
-  height: 90%;       
-  background-color: #ababab;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;  /* Asegura que los elementos estén distribuidos entre el top y el bottom */
-  align-items: center;
-  text-align: center;
-  border-radius: 10px;     /* Bordes redondeados */
-  padding: 20px;           /* Espaciado interno */
+@keyframes blink {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.8; }
 }
 
-/* Header: Título ECHOCORE */
-.inicioHeader {
-  width: 100%;
-  margin-bottom: 10px; /* Espacio entre el título y el canvas */
+@keyframes fall {
+  0% { transform: translateY(-100px); }
+  100% { transform: translateY(100vh); }
 }
-
-.inicioHeader h1 {
-  font-size: 3rem;  /* Ajusta el tamaño del título */
-  color: #212121; /* Color del título */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
-  margin-top: 90px;
-
-}
-
-/* Contenedor del canvas */
-.inicioCanvas {
+/* Estilo para la sección #inicio / Style for the #inicio section */
+.start {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1; /* Hace que el canvas ocupe el espacio restante */
+  height: 100vh;
 }
 
-/* Texto "PRESS ENTER TO START" */
-.inicioFooter {
+/* Contenedor principal / Main container */
+.startContainer {
+  width: 800px;
+  height: 90%;
+  background-color: rgba(50, 50, 50, 0.7); /* Fondo gris oscuro / Dark gray background */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6); /* Sombra oscura / Dark shadow */
+}
+
+/* Header: Título ECHOCORE / Header: ECHOCORE title */
+.startHeader {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.startHeader h1 {
+  font-size: 3rem;
+  color: white; /* Título en blanco / White title */
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+  margin-top: 90px;
+}
+
+/* Contenedor del canvas / Canvas container */
+.startCanvas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+/* Texto "PRESS ENTER TO START" / "PRESS ENTER TO START" text */
+.startFooter {
   width: 100%;
   margin-bottom: 70px;
   display: flex;
   justify-content: center;
 }
 
-.inicioFooter p {
-  color: #212121;  /* Color del texto */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
-  font-size: 1.2rem; /* Tamaño de la fuente más pequeña */
-  animation: blink 1.5s infinite ease-in-out; /* Animación de parpadeo */
+.startFooter p {
+  color: white; /* Texto blanco / White text */
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+  font-size: 1.2rem;
+  animation: blink 1.5s infinite ease-in-out;
 }
 
-/* Animación de parpadeo */
+/* Animación de parpadeo / Blinking animation */
 @keyframes blink {
   0% {
-      opacity: 1;
+    opacity: 1;
   }
   50% {
-      opacity: 0;
+    opacity: 0;
   }
   100% {
-      opacity: 1;
+    opacity: 1;
   }
 }
-
 
 canvas {
   width: 800px;
@@ -94,128 +113,218 @@ canvas {
   position: absolute;
   top: 50%;
   left: 50%;
-  box-shadow: 3px 5px 7px #00000061;
+  box-shadow: 3px 5px 7px rgba(255, 255, 255, 0.2);
   transform: translate(-50%, -50%);
+  border: 3px solid rgba(255, 255, 255, 0.5); /* Borde sutil blanco / Subtle white border */
 }
 
-/* Contenedor del menú */
+/* Contenedor del menú / Menu container */
 .menuContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;        /* Centra el contenido horizontalmente */
-  justify-content: center;     /* Centra el contenido verticalmente */
-  text-align: center;
-  padding: 20px;
-  gap: 20px;
-  background-color: #4449;
-  width: 800px;
-  height: 90%;
-  border-radius: 10px;
-  box-shadow: 3px 5px 7px #00000061; /* Agrega sombra */
-  position: absolute;          /* Posiciona de manera absoluta */
-  top: 50%;                    /* Coloca el contenedor a la mitad de la altura */
-  left: 50%;                   /* Coloca el contenedor a la mitad de la anchura */
-  transform: translate(-50%, -50%); /* Ajusta para que quede completamente centrado */
-}
-
-
-/* Contenedor de los Power-Ups */
-.menu_powerUps {
-  display: flex; /* Alineamos los power-ups horizontalmente */
-  justify-content: space-between; /* Los power-ups estarán separados de manera uniforme */
-  gap: 15px; /* Espacio entre los power-ups */
-  width: 100%; /* Asegúrate de que ocupe todo el ancho */
-  max-width: 800px; /* Limita el ancho para que no ocupe demasiado espacio */
-}
-
-/* Cada lista de power-up (Damage, Speed, Columns) */
-.menu_powerUps ul {
-  list-style: none; /* Elimina los puntos de la lista */
-  padding: 0;
-  margin: 0;
-  width: 30%; /* Limita el ancho de cada columna */
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Alinea el contenido al centro */
-  justify-content: space-around; /* Espacio uniforme entre los elementos */
-}
-
-/* Estilo para cada Power-Up */
-.menu_powerUps li {
-  background-color: #444;
-  border-radius: 10px;
-  padding: 15px;
-  text-align: center;
-  transition: transform 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  padding: 20px;
+  gap: 20px;
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo negro semi-translúcido / Semi-translucent black background */
+  width: 800px;
+  height: 90%;
+  box-shadow: 3px 5px 7px #00000061;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: relative;
+  border: solid rgba(255, 255, 255, 0.5); /* Borde sutil blanco / Subtle white border */
 }
 
-.menu_powerUps li img {
-  margin-bottom: 10px; /* Espacio entre la imagen y el texto */
+/* Título del menú / Menu title */
+.menuHeader h1 {
+  font-size: 3rem;
+  color: white; /* Título en blanco / White title */
+  margin-bottom: 10px;
 }
 
-/* Efecto hover en los power-ups */
-.menu_powerUps li:hover {
-  transform: translateY(-5px);
-}
-
-.menu_powerUps button {
-  margin-top: 10px;
-  padding: 5px 10px;
-  background-color: #333;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.menu_powerUps button:hover {
-  background-color: #555;
-}
-
-/* Estilo para los puntos */
-.points {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: white;
-  display: inline-block;
-  margin-top: 10px;
-}
-
-/* Sección de Menú */
+/* Sección de Menú / Menu section */
 .menu {
   display: flex;
-  justify-content: center; /* Centra el contenido horizontalmente */
-  align-items: center;    /* Centra el contenido verticalmente */
+  justify-content: center;
+  align-items: center;
   height: 100vh;
 }
 
-/* Estilos para el botón de inicio */
+/* Estilos para el botón de inicio / Styles for the start button */
 .buttomStar {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
 }
 
 #startButton {
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  background-color: #444;
-  color: white;
+  padding: 20px 40px;
+  font-size: 2rem;
+  background-color: #555; /* Gris oscuro / Dark gray */
+  color: white; /* Texto blanco / White text */
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  animation: blink 1.5s infinite;
+  transition: background-color 0.3s;
 }
 
 #startButton:hover {
-  background-color: #555;
+  background-color: #333; /* Gris más oscuro / Darker gray */
 }
 
-h3 {
-  margin-top: 20px;
-  color: white;
+#restartButton {
+  padding: 20px 40px;
+  font-size: 2rem;
+  background-color: #555; /* Gris oscuro / Dark gray */
+  color: white; /* Texto blanco / White text */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  animation: blink 1.5s infinite;
+  transition: background-color 0.3s;
+}
+
+#restartButton:hover {
+  background-color: #333; /* Gris más oscuro / Darker gray */
+}
+
+/* Animación de parpadeo / Blinking animation */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.buttomStar h3 {
+  margin-top: 30px;
+  color: white; /* Texto blanco / White text */
   font-size: 1.5rem;
+}
+
+/* Contenedor de los Power-Ups / Power-Ups container */
+.menu_powerUps {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.menu_powerUps ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.menu_powerUps li {
+  background: linear-gradient(to bottom, #333, #555); /* Fondo gris oscuro / Dark gray background */
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out, background 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 180px;
+  width: 150px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: relative;
+}
+
+.menu_powerUps li img {
+  margin-bottom: 10px;
+}
+
+.menu_powerUps li span {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+.menu_powerUps li:hover {
+  transform: translateY(-5px);
+  background-color: #444; /* Gris más claro / Lighter gray */
+}
+
+.menu_powerUps button {
+  padding: 8px 14px;
+  background-color: #333; /* Fondo oscuro / Dark background */
+  color: white; /* Texto blanco / White text */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu_powerUps button:hover {
+  background-color: #444; /* Gris más claro al pasar el cursor / Lighter gray on hover */
+}
+
+/* Estilo para los puntos / Style for the points */
+.menuContainer p {
+  margin-top: 20px;
+  color: white; /* Texto blanco / White text */
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.points {
+  color: white; /* Texto blanco / White text */
+  font-size: 2.5rem;
+}
+
+.word {
+  color: white; /* Texto blanco / White text */
+  font-size: 2.5rem;
+}
+
+/* Efecto de puntos insuficientes / Insufficient points effect */
+.menu_powerUps li.insufficient {
+  background: linear-gradient(to bottom, rgba(255, 0, 0, 0.7), rgba(200, 0, 0, 0.7)) !important;
+}
+
+.menu_powerUps li.insufficient::after {
+  content: "Insufficient Funds";
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: red; /* Texto rojo / Red text */
+  font-size: 0.9rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.menu_powerUps li.insufficient.show-text::after {
+  opacity: 1;
+}
+
+/* Animación de sacudida / Shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.menu_powerUps li.shaking {
+  animation: shake 0.3s ease;
 }
