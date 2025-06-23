@@ -17,6 +17,9 @@ export class Player {
     }
 
     update(keys, shootCooldown, bullets, canvas, speedUpgrade = 0) {
+        let prevWidth = this.width;
+        let prevHeight = this.height;
+
         if (keys["j"]) {
             this.isJPressed = true;
             this.speed = 2;
@@ -27,6 +30,14 @@ export class Player {
             this.speed = 4;
             this.width = 20;
             this.height = 20;
+        }
+
+        // Ajustar posición para mantener el centro
+        if (this.width !== prevWidth) {
+            this.x += (prevWidth - this.width) / 2;
+        }
+        if (this.height !== prevHeight) {
+            this.y += (prevHeight - this.height) / 2;
         }
 
         if (keys["w"] || keys["ArrowUp"]) this.y -= this.speed;

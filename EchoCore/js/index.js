@@ -457,3 +457,18 @@ document.querySelectorAll('.damage-btn, .speed-btn, .columns-btn').forEach(butto
         console.log(`Purchased ${type} level ${nextLevel} for ${cost} points. Remaining: ${totalPoints}`);
     });
 });
+
+// Crear estrellas animadas en el fondo
+const numStars = 250;
+
+for (let i = 0; i < numStars; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+    star.style.top = `${Math.random() * window.innerHeight}px`;
+    star.style.left = `${Math.random() * window.innerWidth}px`;
+    star.style.animationDuration = `${1 + Math.random() * 2}s`;
+    star.style.opacity = 0.1;
+    document.body.appendChild(star);
+}
+
+window.addEventListener('resize', () => location.reload());
